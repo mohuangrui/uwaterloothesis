@@ -1,0 +1,86 @@
+%%%%% --------------------------------------------------------------------------------
+%%
+%%                               Document Template
+%%
+%%%%% --------------------------------------------------------------------------------
+%% Document Template by Mo Huang Rui <mohuangrui@gmail.com>
+%% based on the LaTeX-Wikibook.
+%%
+%% written by Mo Huangrui <mohuangrui@gmail.com>
+%% $Id: Thesis.tex,v 0.1 2014/07/14 08:00:00 $
+%%
+%% This program can be redistributed and/or modified under the terms
+%% of the GNU Public License, version 2.
+%%
+%% This fork was created to satisfy personnal taste in code.
+%%%%% --------------------------------------------------------------------------------
+%%
+%%%%*************************Document Class Declaration*******************************
+%%
+\documentclass[doublesided]{uwaterloothesis}% thesis template of University of Waterloo
+%% Options:
+%% [doublesided] % change to double-sided printing style
+%% [draftversion] % show draft version information, only effect with "doublesided"
+%% [standard options for book class]
+%%%%% --------------------------------------------------------------------------------
+%%
+%%%%**************************Command Define and Settings*****************************
+%%
+\usepackage{custom}% custom settings and user defined commands
+%%%%% --------------------------------------------------------------------------------
+%%
+%%%%*********************************Content******************************************
+%%
+\begin{document}
+%%
+%%%%% --------------------------------------------------------------------------------
+%%
+%%%%*********************************Frontmatter**************************************
+%%
+%% Frontmatter of Title page, Table of contents, Preface chapter.
+\frontmatter
+%%
+%% >>> Frontpages
+%%
+\input{Frontpages}
+%%
+%%% >>> List of Content
+%%
+\tableofcontents% contents catalog
+\listoftables% tables catalog
+\listoffigures% figures catalog
+%%
+%% >>> prematter
+%%
+\input{Prematter}% list of symbols, preface of books
+%%
+%%%%% --------------------------------------------------------------------------------
+%%
+%%%%*********************************Mainmatter***************************************
+%%
+%% Main topics.
+\mainmatter
+%%
+%%% >>> Main Contents
+%%
+\input{Main_Content}%
+%%%%% --------------------------------------------------------------------------------
+%%
+%%%%*********************************Appendix*****************************************
+%%
+%% Some subordinate chapters.
+\appendix%
+\input{Appendix}%
+%%%%% --------------------------------------------------------------------------------
+%%
+%%%%********************************Backmatter****************************************
+%%
+%% Matters of Bibliography, Glossary, Index.
+\backmatter
+%%
+%%% >>> Bibliography
+%%
+\bibliography{Myrefs}%
+\intotoc{References}% add a corresponding item to the contents table and bookmark
+%%
+\end{document}
