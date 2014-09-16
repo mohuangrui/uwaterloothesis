@@ -168,6 +168,16 @@
       \end{footnotesize}
     \fi
     \cleardoublepage
+  \else
+    \ifUW@versioninfo
+      \thispagestyle{empty}
+      \vspace*{\stretch{1}}
+      \begin{footnotesize}
+        \noindent
+        Draft Version (\today)
+      \end{footnotesize}
+      \cleardoublepage
+    \fi
   \fi
 }
 %%%%% --------------------------------------------------------------------------------
