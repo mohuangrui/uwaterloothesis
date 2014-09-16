@@ -42,7 +42,7 @@
 %% beacuse of \renewcommand*{\familydefault}{\rmdefault}, it's also determine \normalfont
 %% examples: Times New Roman, Garamond, Adobe Garamond Pro
 %\setmainfont[BoldFont=Garamond-Bold,ItalicFont=Garamond-Italic]{Garamond}%
-\setmainfont{Times New Roman}%
+%\setmainfont{Times New Roman}%
 %% Sans serif - typefaces without strokes (lit. without serif) to get high readability
 %% determine \sffamily, usually for signage, headings that demanding high readability
 %% examples: Helvetica, Gill Sans, Futura
@@ -198,9 +198,9 @@
 \fi
 %% Setting Hyperlinks
 \hypersetup{% set hyperlinks.
-  pdftitle={\UW@value@title},% title
-  pdfauthor={\UW@value@author},% author
-  pdfsubject={\UW@value@discipline},% subject
+  %pdftitle={},% title
+  %pdfauthor={},% author
+  %pdfsubject={},% subject
   %pdfkeywords={keyword1}{key2} {key3},% list of keywords, and uncomment this line if desired
   %pdftoolbar=true,% show Acrobat’s toolbar?
   %pdfmenubar=true,% show Acrobat’s menu?
@@ -225,7 +225,7 @@
 %% >>> Extensions and Directories for graphics
 %%
 \DeclareGraphicsExtensions{.pdf,.png,.jpg}% available graphic extensions
-%\graphicspath{{./Img/}}% search path for figures, no need if use compile.bat to compile
+%\graphicspath{{./Img/}}% search path for figures, no need if use scripts to compile
 %%
 %%% >>> Math
 %%
