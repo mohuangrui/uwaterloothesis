@@ -1,19 +1,17 @@
 %%%%% --------------------------------------------------------------------------------
-%% This is file `uwaterloothesis.cls',
-%% This file was created by Mo Huangrui for the uwaterloothesis package project.
-%%%%% --------------------------------------------------------------------------------
 %%
-%% It may be distributed and/or modified under the
-%% conditions of the LaTeX Project Public License, either version 1.2
-%% of this license or (at your option) any later version.
+%%%%***************************** version information *********************************
 %%
-%%%%% --------------------------------------------------------------------------------
+%% this is the "uwaterloothesis.cls" file for "uwaterloothesis" class definition
+%% written by Huangrui Mo <mohuangrui@gmail.com>
+%% $Last-modified: 25 Nov 2014 11:25:33 AM
 %%
-%%%%***************************** version infomation *********************************
+%% This program can be redistributed and/or modified under the terms
+%% of the GNU Public License, version 2.
 %%
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{uwaterloothesis}
-  [2014/07/14 v0.1 uwaterloothesis
+  [2014/10/01 v0.1 uwaterloothesis
    document class]
 %%%%% --------------------------------------------------------------------------------
 %%
@@ -198,8 +196,8 @@
   {\cleardoublepage}
 %% dedication
 \newenvironment{dedication}
-  {\prechapter{\UW@label@dedication}}
-  {\cleardoublepage}
+  {\prechapter{\UW@label@dedication}\begin{center}\bigskip\itshape}
+  {\end{center}\cleardoublepage}
 %% nomenclature
 \newenvironment{nomenclature}
   {\chapter{\UW@label@nomenclature}}

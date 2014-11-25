@@ -58,7 +58,7 @@
     %%\cline{1-2}
     items \\
     \hline
-    datas
+    datas \\
     \hline\hline
   \end{tabular}
 \end{center}
@@ -74,7 +74,7 @@
     %%\cline{1-2}
     items \\
     \hline
-    datas
+    datas \\
     \hline\hline
   \end{tabular}
   \caption{}
