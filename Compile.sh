@@ -5,14 +5,14 @@
 #* *************************************************************************
 #*                        pre information
 #* *************************************************************************
-if [ "$#" == "1" ];then
+if [[ "$#" == "1" ]];then
     File_Name=`echo *.tex`
-elif [ "$#" == "2" ];then
+elif [[ "$#" == "2" ]];then
     File_Name="$2"
 else
     echo "*************************************************************************"
-    echo "Usage: "$0" Compiler(\"x\" or \"p\") File_Name(if omitted, auto search)"
-    echo "Compiler \"x\" for \"xelatex\" and  \"p\" for \"pdflatex\""
+    echo "Usage: "$0" Compiler(specify \"x\" or \"p\") File_Name(if omitted, auto search)"
+    echo "Compiler \"x\" for \"xelatex\" and  \"p\" for \"pdflatex\" (specify without quotes)"
     echo "if compile failed, use \"X\" to terminate the terminal..."
     echo "*************************************************************************"
     exit
@@ -61,7 +61,15 @@ $CompileName -output-directory=$Tmp $File_Name || exit
 #* *************************************************************************
 #*                open the generated pdf file
 #* *************************************************************************
-gnome-open ./$Tmp/"$File_Name".pdf || exit
+System_Name=`uname`
+if [[ $System_Name == "Linux" ]]; then
+    PDFviewer="gnome-open"
+elif [[ $System_Name == "Darwin" ]]; then
+    PDFviewer="open"
+else
+    PDFviewer="open"
+fi
+$PDFviewer ./$Tmp/"$File_Name".pdf || exit
 echo "*************************************************************************"
 echo "use $CompileName Compile "$File_Name".tex finished!"
 echo "*************************************************************************"
