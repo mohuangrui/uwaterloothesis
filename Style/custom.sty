@@ -4,7 +4,7 @@
 %%
 %% this is the "custom.sty" package used for configure document styles
 %% written by Huangrui Mo <mohuangrui@gmail.com>
-%% $Last-modified: 24 Nov 2014 04:05:23 PM
+%% $Last-modified: 28 Nov 2014 05:17:00 PM
 %%
 %% This program can be redistributed and/or modified under the terms
 %% of the GNU Public License, version 2.
@@ -41,6 +41,22 @@ macros package]
 %%
 \newcommand*{\MyFactor}{0.8}% for single figure
 \newcommand*{\MySubFactor}{0.48}% for subfigure
+%%
+%%% >>> Add content link to the table of content and bookmark
+%%
+%% define a macro for adding chapter/section title to toc and bookmark.
+\newcommand{\intotoc}[2][chapter]{%
+    %\markboth{\MakeUppercase{#2}}{}%set the leftmark with upcase
+    \markboth{{#2}}{}%set the leftmark
+    \phantomsection% use for adobe bookmark.
+    \addcontentsline{toc}{#1}{#2}% add content #2 to toc as #1
+}
+%%
+%%% >>> Define a command for Nomenclature
+%%
+\newcommand{\nomenclatureitem}[3][ ]{
+    \noindent\makebox[0.15\textwidth][l]{#2}{{#3}\hfill{#1}}\par
+}
 %%%%% --------------------------------------------------------------------------------
 %%
 %%%%*****************************User Configuration***********************************

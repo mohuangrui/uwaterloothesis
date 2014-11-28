@@ -4,7 +4,7 @@
 %%
 %% this is the "commons.sty" package used for configure document styles
 %% written by Huangrui Mo <mohuangrui@gmail.com>
-%% $Last-modified: 24 Nov 2014 04:05:38 PM
+%% $Last-modified: 28 Nov 2014 05:14:06 PM
 %%
 %% This program can be redistributed and/or modified under the terms
 %% of the GNU Public License, version 2.
@@ -232,12 +232,21 @@ macros package]
 %% \fancyhfoffset is a merge of \fancyheadoffset and \fancyfootoffset
 %% configure fancy style
 \ifCOMMONS@uwaterloo% header and footer style for uwaterloo thesis
-\pagestyle{fancy}
-%% the width of header and footer
-%\fancyheadoffset[LE,RO]{\marginparsep+\marginparwidth}
+\pagestyle{fancy}% redefine the default header and footer setting of LaTeX
 %% reset style of chapter and section mark to actual name without converting it to uppercase
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{#1}{}}
+\fancyhf{}% clear all header and footer fields
+%% define different kinds of header and footer for defferent parts
+\fancypagestyle{frontmatterstyle}{% header and footer style for frontmatter
+    \renewcommand{\headrulewidth}{0pt}% No header rule
+    \renewcommand{\footrulewidth}{0pt}% No footer rule
+    \fancyhf{}% Clear header/footer
+    \fancyfoot[C]{\thepage}%
+}
+\fancypagestyle{mainmatterstyle}{% header and footer style for mainmatter
+%% the width of header and footer
+%\fancyheadoffset[LE,RO]{\marginparsep+\marginparwidth}
 \fancyhf{}% clear all header and footer fields
 %% header configure:
 \fancyhead[RE]{\small \UW@value@titlemark}% title name in header, \@title is the default value
@@ -248,6 +257,19 @@ macros package]
 %% the thickness of the decorative lines on both the header and the footer
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
+}
+%% redefine \frontmatter to include the change
+\let\myfrontmatter\frontmatter
+\renewcommand{\frontmatter}{%
+\myfrontmatter
+\pagestyle{frontmatterstyle}
+}
+%% redefine \mainmatter to include the change
+\let\mymainmatter\mainmatter
+\renewcommand{\mainmatter}{%
+\mymainmatter
+\pagestyle{mainmatterstyle}
+}
 %% Some LATEX commands, like \chapter, use the \thispagestyle command to automatically switch
 %% to the plain page style, thus ignoring the page style currently in effect.
 %% To customize even such pages you must redefine the plain pagestyle.

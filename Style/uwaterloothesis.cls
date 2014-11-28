@@ -4,7 +4,7 @@
 %%
 %% this is the "uwaterloothesis.cls" file for "uwaterloothesis" class definition
 %% written by Huangrui Mo <mohuangrui@gmail.com>
-%% $Last-modified: 25 Nov 2014 11:25:33 AM
+%% $Last-modified: 28 Nov 2014 03:25:14 PM
 %%
 %% This program can be redistributed and/or modified under the terms
 %% of the GNU Public License, version 2.
@@ -22,9 +22,9 @@
 \DeclareOption{draftversion}{% draft information reminder
   \UW@versioninfotrue%
 }
-\newif\ifUW@printtype \UW@printtypefalse
+\newif\ifUW@doublesided \UW@doublesidedfalse
 \DeclareOption{doublesided}{% enable double-sided printing
-  \UW@printtypetrue%
+  \UW@doublesidedtrue%
 }
 \DeclareOption*{% handle non-implemented options
   \PassOptionsToClass{\CurrentOption}{book}%
@@ -35,7 +35,7 @@
 %%
 %%%%*************************** loadclass infomation *********************************
 %%
-\ifUW@printtype% if double-sided printing enabled
+\ifUW@doublesided% if double-sided printing enabled
   \LoadClass[letterpaper,12pt,openright,twoside]{book}
 \else% if double-sided printing isn't enabled
   \LoadClass[letterpaper,12pt,oneside]{book}
@@ -101,13 +101,6 @@
     {\bfseries #1}
   \end{center}%
   }
-%% define a macro for add chapter without an number to toc and bookmark.
-\newcommand\intotoc[1]{%
-  %\markboth{\MakeUppercase{#1}}{}%set the leftmark with upcase
-  \markboth{{#1}}{}%set the leftmark
-  \phantomsection% use for adobe bookmark.
-  \addcontentsline{toc}{chapter}{#1}% for chapters.
-}
 %%%%% --------------------------------------------------------------------------------
 %%
 %%%%******************* commands of titlepage items **********************************
