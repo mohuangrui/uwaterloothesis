@@ -4,7 +4,7 @@
 %%
 %% this is the "commons.sty" package used for configure document styles
 %% written by Huangrui Mo <mohuangrui@gmail.com>
-%% $Last-modified: 28 Nov 2014 05:14:06 PM
+%% $Last-modified: 29 Nov 2014 02:51:37 PM
 %%
 %% This program can be redistributed and/or modified under the terms
 %% of the GNU Public License, version 2.
@@ -17,9 +17,22 @@ macros package]
 %%
 %%%%********************************Declare Options**********************************
 %%
+\newif\ifCOMMONS@fancyhdr \COMMONS@fancyhdrfalse
+\DeclareOption{fancyhdr}{% enable fancyhdr for header and footer
+    \COMMONS@fancyhdrtrue%
+}
 \newif\ifCOMMONS@uwaterloo \COMMONS@uwaterloofalse
 \DeclareOption{uwaterloo}{% uwaterloo thesis style
+    \COMMONS@fancyhdrtrue%
     \COMMONS@uwaterlootrue%
+}
+\newif\ifCOMMONS@geometry \COMMONS@geometryfalse
+\DeclareOption{geometry}{% enable geometry for redefining page layout
+    \COMMONS@geometrytrue%
+}
+\newif\ifCOMMONS@numeric \COMMONS@numericfalse
+\DeclareOption{numeric}{% enable numeric citation mode
+    \COMMONS@numerictrue%
 }
 %% end-user parameters, each option is declared by one declare option command
 \DeclareOption*{% handle non-implemented options
@@ -105,20 +118,26 @@ macros package]
 %%
 %% >>> Page Layout and Line Spacing
 %%
-\RequirePackage{fancyhdr}% fancy headers and footers
-%\RequirePackage{geometry}% page layout
-%\RequirePackage{setspace}% line spacing
+\ifCOMMONS@fancyhdr% header and footer style
+    \RequirePackage{fancyhdr}% fancy headers and footers
+\fi
+\ifCOMMONS@geometry% enable geometry to redefine page layout
+    \RequirePackage{geometry}% page layout
+    %\RequirePackage{setspace}% line spacing
+\fi
 %%
 %%% >>> Natural Sciences Citations and References
 %%
 %% if use bibtex citation, not need to use any packages!
 %% if use natbib package, then:
-\RequirePackage{natbib}% author year citation mode
-%\RequirePackage[square,comma,numbers,sort&compress]{natbib}% numeric cite mode
-%\RequirePackage[square,comma,super,sort&compress]{natbib}% superscripted numeric cite mode
-\bibliographystyle{apalike}% APA citation style
-%\bibliographystyle{unsrtnat}% sort as referenced
-%\bibliographystyle{plainnat}% sort by author name
+\ifCOMMONS@numeric% enable numeric citation mode
+    %\RequirePackage[square,comma,numbers,sort&compress]{natbib}% numeric cite mode
+    \RequirePackage[square,comma,super,sort&compress]{natbib}% superscripted numeric cite mode
+    \bibliographystyle{unsrtnat}% sort as referenced
+\else
+    \RequirePackage{natbib}% author year citation mode is the default
+    \bibliographystyle{apalike}% author citation mode with APA citation style
+\fi
 %%
 %%% >>> Verbatim
 %%
@@ -152,11 +171,11 @@ macros package]
 %%
 %% packages and settings depend on PDF mode
 \ifxetex % running xelatex in PDF mode
-  \RequirePackage[xetex]{hyperref}
+    \RequirePackage[xetex]{hyperref}
 \else
-  \ifpdf % running pdfTeX in PDF mode
-    \RequirePackage[pdftex]{hyperref}
-  \fi
+    \ifpdf % running pdfTeX in PDF mode
+        \RequirePackage[pdftex]{hyperref}
+    \fi
 \fi
 %% Setting Hyperlinks
 \hypersetup{% set hyperlinks.
@@ -186,7 +205,13 @@ macros package]
 %%
 %% >>> Extensions and Directories for graphics
 %%
-\DeclareGraphicsExtensions{.pdf,.png,.jpg}% available graphic extensions
+\ifxetex % running xelatex in PDF mode
+    \DeclareGraphicsExtensions{.pdf,.png,.jpg,.gif,.bmp}% available graphic extensions
+\else
+    \ifpdf % running pdfTeX in PDF mode
+        \DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg,.PNG,.JPG,.JPEG}%
+    \fi
+\fi
 %\graphicspath{{./Img/}}% search path for figures, no need if use scripts to compile
 %%
 %%% >>> Define Some Color Command:
@@ -195,93 +220,73 @@ macros package]
 %%
 %%% >>> Layout and Margin
 %%
-%\geometry{left=3.18cm,right=3.18cm,top=2.54cm,bottom=2.54cm}% normal margins at each side.
-%\geometry{left=2.54cm,right=2.54cm,top=2.54cm,bottom=2.54cm}% reduced margins at each side.
+\ifCOMMONS@geometry% enable geometry to redefine page layout
+    %\geometry{left=3.18cm,right=3.18cm,top=2.54cm,bottom=2.54cm}% normal margins at each side.
+    \geometry{left=2.54cm,right=2.54cm,top=2.54cm,bottom=2.54cm}% reduced margins at each side.
+\fi
 %%
 %%% >>> Page header and footer Style
 %%
 %% Page styles in Latex terms refers not to page dimensions, but to the running headers
 %% and footers of a document. These headers typically contain document titles, chapter
 %% or section numbers/names, and page numbers.
-%% The possibilities of changing the headers in plain Latex are actually quite limited.
-%% There are two commands available:
-%% \pagestyle{''style''} will apply the specified style to the current and all subsequent pages
-%% \thispagestyle{''style''} will only affect the current page. The possible styles are:
-%% empty	Both header and footer are cleared
-%% plain	Header is clear, but the footer contains the page number in the center.
-%% headings	Footer is blank, header displays information according to document class
-%%          (e.g., section name) and page number top right.
-%% myheadings Page number is top right, and it is possible to control the rest of the header.
-%% To get better control over the headers, one can use the package "fancyhdr"
-%% set page style by fancyhdr:
-%% Documents can be either one- or two-sided. Articles are by default one-sided, books are two-sided.
-%% For one-sided document, only the odd commands and variables will be in effect.
-%% the command \fancyhead for header and \fancyfoot for footer.
-%% \fancyhf is a merge of \fancyhead and \fancyfoot, hence the name.
-%% The syntax is: \fancyhead[selectors]{output you want}
-%% E Even page
-%% O Odd page
-%% L Left field
-%% C Center field
-%% R Right field
-%% H Header
-%% F Footer
-%% so [CE,RO] will refer to the center of the even pages and to the right side of the odd pages.
-%% the width of the headers and footers, make the width wider or narrower by using:
-%% \fancyhfoffset[selectors]{length}% length could be >0 or <0
-%% \fancyhfoffset is a merge of \fancyheadoffset and \fancyfootoffset
 %% configure fancy style
+\ifCOMMONS@fancyhdr% header and footer style
+    \pagestyle{fancy}
+    %% the width of header and footer
+    %\fancyheadoffset[LE,RO]{\marginparsep+\marginparwidth}
+    %% reset style of chapter and section mark to actual name without converting it to uppercase
+    \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+    \renewcommand{\sectionmark}[1]{\markright{#1}{}}
+    %\fancyhf{}% clear all header and footer fields
+    %% header configure:
+    %\fancyhead[RE]{\small \@title}% title name in header
+    %\fancyhead[LO]{\small \rightmark}% section name in header
+    %\fancyhead[LE,RO]{\small \thepage}% page number in header
+    %% footer configure:
+    %\fancyfoot[CE,CO]{\small \thepage}% page number in footer at center
+    %% the thickness of the decorative lines on both the header and the footer
+    %\renewcommand{\headrulewidth}{0pt}
+    %\renewcommand{\footrulewidth}{0pt}
+    %% Some LATEX commands, like \chapter, use the \thispagestyle command to automatically switch
+    %% to the plain page style, thus ignoring the page style currently in effect.
+    %% To customize even such pages you must redefine the plain pagestyle.
+    %% redefine plain style:
+    %\fancypagestyle{plain}{%
+        %\fancyhf{}% remove everything
+        %\renewcommand{\headrulewidth}{0pt}% remove lines as well
+        %\renewcommand{\footrulewidth}{0pt}% remove lines as well
+    %}
+\fi
 \ifCOMMONS@uwaterloo% header and footer style for uwaterloo thesis
-\pagestyle{fancy}% redefine the default header and footer setting of LaTeX
-%% reset style of chapter and section mark to actual name without converting it to uppercase
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-\renewcommand{\sectionmark}[1]{\markright{#1}{}}
-\fancyhf{}% clear all header and footer fields
 %% define different kinds of header and footer for defferent parts
 \fancypagestyle{frontmatterstyle}{% header and footer style for frontmatter
-    \renewcommand{\headrulewidth}{0pt}% No header rule
-    \renewcommand{\footrulewidth}{0pt}% No footer rule
     \fancyhf{}% Clear header/footer
     \fancyfoot[C]{\thepage}%
+    \renewcommand{\headrulewidth}{0pt}% No header rule
+    \renewcommand{\footrulewidth}{0pt}% No footer rule
 }
 \fancypagestyle{mainmatterstyle}{% header and footer style for mainmatter
-%% the width of header and footer
-%\fancyheadoffset[LE,RO]{\marginparsep+\marginparwidth}
-\fancyhf{}% clear all header and footer fields
-%% header configure:
-\fancyhead[RE]{\small \UW@value@titlemark}% title name in header, \@title is the default value
-\fancyhead[LO]{\small \leftmark}% chapter name in header
-\fancyhead[LE,RO]{\small \thepage}% page number in header
-%% footer configure:
-%\fancyfoot[CE,CO]{\small \thepage}% page number in footer at center
-%% the thickness of the decorative lines on both the header and the footer
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
+    \fancyhf{}% clear all header and footer fields
+    %% header configure:
+    \fancyhead[RE]{\small \UW@value@titlemark}% title name in header, \@title is the default value
+    \fancyhead[LO]{\small \leftmark}% chapter name in header
+    \fancyhead[LE,RO]{\small \thepage}% page number in header
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
 }
 %% redefine \frontmatter to include the change
 \let\myfrontmatter\frontmatter
 \renewcommand{\frontmatter}{%
-\myfrontmatter
-\pagestyle{frontmatterstyle}
+    \myfrontmatter
+    \pagestyle{frontmatterstyle}
 }
 %% redefine \mainmatter to include the change
 \let\mymainmatter\mainmatter
 \renewcommand{\mainmatter}{%
-\mymainmatter
-\pagestyle{mainmatterstyle}
+    \mymainmatter
+    \pagestyle{mainmatterstyle}
 }
-%% Some LATEX commands, like \chapter, use the \thispagestyle command to automatically switch
-%% to the plain page style, thus ignoring the page style currently in effect.
-%% To customize even such pages you must redefine the plain pagestyle.
-%% redefine plain style:
-%\fancypagestyle{plain}{%
-%\fancyhf{}% remove everything
-%% header configure:
-%\fancyhead[C]{\small \leftmark}% chapter name at left of odd page header
-%% the thickness of the decorative lines on both the header and the footer
-%\renewcommand{\headrulewidth}{0.5pt}% remove lines as well
-%\renewcommand{\footrulewidth}{0pt}% remove lines as well
-%}
 \fi
 %%%%% --------------------------------------------------------------------------------
 \endinput
