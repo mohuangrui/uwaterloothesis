@@ -4,7 +4,7 @@
 %%
 %% this is the "uwaterloothesis.cls" file for "uwaterloothesis" class definition
 %% written by Huangrui Mo <mohuangrui@gmail.com>
-%% $Last-modified: 30 Nov 2014 04:52:44 PM
+%% $Last-modified: 30 Nov 2014 06:17:32 PM
 %%
 %% This program can be redistributed and/or modified under the terms
 %% of the GNU Public License, version 2.
@@ -68,10 +68,10 @@
 %% part one -- horizontal widths
 \ifUW@printcopy% if print copy layout enabled
   \setlength{\oddsidemargin}{0.125in}% ensure binding side at least 0.125in + 1.0in (fixed)
-  \setlength{\evensidemargin}{0in}% ensure same binding side width for two-sided printed copy
+  \setlength{\evensidemargin}{0in}% ensure a uniform binding width for two-sided printed copy
 \else
   \setlength{\oddsidemargin}{0.125in}% ensure binding side at least 1.125in
-  \setlength{\evensidemargin}{0.125in}% ensure same left margin for EThesis when two-sided
+  \setlength{\evensidemargin}{0.125in}% ensure a uniform left margin for EThesis when two-sided
 \fi
 %% set margin for notes to zero to get the maximum textwidth
 \setlength{\marginparwidth}{0pt}% width of margin notes
