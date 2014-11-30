@@ -4,7 +4,7 @@
 %%
 %% this is the "commons.sty" package used for configure document styles
 %% written by Huangrui Mo <mohuangrui@gmail.com>
-%% $Last-modified: 29 Nov 2014 02:51:37 PM
+%% $Last-modified: 30 Nov 2014 10:45:40 AM
 %%
 %% This program can be redistributed and/or modified under the terms
 %% of the GNU Public License, version 2.
@@ -23,7 +23,7 @@ macros package]
 }
 \newif\ifCOMMONS@uwaterloo \COMMONS@uwaterloofalse
 \DeclareOption{uwaterloo}{% uwaterloo thesis style
-    \COMMONS@fancyhdrtrue%
+    \COMMONS@fancyhdrtrue% need the fancyhdr package
     \COMMONS@uwaterlootrue%
 }
 \newif\ifCOMMONS@geometry \COMMONS@geometryfalse
@@ -33,6 +33,28 @@ macros package]
 \newif\ifCOMMONS@numeric \COMMONS@numericfalse
 \DeclareOption{numeric}{% enable numeric citation mode
     \COMMONS@numerictrue%
+}
+\newif\ifCOMMONS@list \COMMONS@listfalse
+\DeclareOption{list}{% enable enhanced list structures
+    \COMMONS@listtrue%
+}
+\newif\ifCOMMONS@color \COMMONS@colorfalse
+\DeclareOption{color}{% enable color package to use color
+    \COMMONS@colortrue%
+}
+\newif\ifCOMMONS@background \COMMONS@backgroundfalse
+\DeclareOption{background}{% enable page background
+    \COMMONS@colortrue% need a color package
+    \COMMONS@backgroundtrue%
+}
+\newif\ifCOMMONS@tikz \COMMONS@tikzfalse
+\DeclareOption{tikz}{% enable tikz package for complex diagrams
+    \COMMONS@colortrue% need xcolor package
+    \COMMONS@tikztrue%
+}
+\newif\ifCOMMONS@table \COMMONS@tablefalse
+\DeclareOption{table}{% enable a table package for complex tables
+    \COMMONS@tabletrue%
 }
 %% end-user parameters, each option is declared by one declare option command
 \DeclareOption*{% handle non-implemented options
@@ -139,33 +161,54 @@ macros package]
     \bibliographystyle{apalike}% author citation mode with APA citation style
 \fi
 %%
-%%% >>> Verbatim
-%%
-%% Improves the verbatim environment, fixing some bugs. Moreover
-%% it provides the comment environment, that lets you add multiple-line
-%% comments or easily comment out big parts of the code.
-%\RequirePackage{verbatim}
-%\RequirePackage{fancyvrb}%
-%\RequirePackage{listing}%
-%%
 %% >>> List Structures
 %%
-%\RequirePackage{enumerate}%
+\ifCOMMONS@list% enable enhanced list and verbatim structures
+    \RequirePackage{enumitem}% configure the enumerate environment
+    \RequirePackage{listing}% useful for Algorithm and Coding
+    %% Improves the verbatim environment, fixing some bugs. Moreover
+    %% it provides the comment environment, that lets you add multiple-line
+    %% comments or easily comment out big parts of the code.
+    \RequirePackage{verbatim}
+\fi
 %%
 %%% >>> Color
 %%
-%\RequirePackage{color}%
-%\RequirePackage[usenames,dvipsnames,svgnames,table]{xcolor}%
+\ifCOMMONS@color% enable color package to use color
+    %\RequirePackage{color}%
+    \RequirePackage[dvipsnames]{xcolor}%
+\fi
 %%
 %%% >>> Tables
 %%
-%% ctable package imports the array, tabularx and booktabs packages
-%% all commands from those packages are available as well.
-%\RequirePackage{ctable}%
+\ifCOMMONS@table% enable a table for complex tables
+    %% ctable package imports the array, tabularx and booktabs packages
+    %% all commands from those packages are available as well.
+    \RequirePackage{ctable}%
+\fi
 %%
 %% >>> Math packages
 %%
-\RequirePackage{amsmath,amssymb,amstext}
+\RequirePackage{mathtools,amstext,amsfonts}
+%%
+%% >>> Tkiz
+%%
+%% Draw graphics directly with TeX commands
+%% LaTeX/PGF/TikZ to draw procedural graphics directly with TeX commands.
+%% Using TikZ in a LaTeX document requires loading the tikz package:
+\ifCOMMONS@tikz% enable tikz for complex diagrams
+    \RequirePackage{tikz}%
+    %% This will automatically load the pgf package. To load further libraries use:
+    \usetikzlibrary{
+        positioning,
+        arrows,
+        calc,
+        trees
+    }%
+\fi
+%% Examples for libraries are "arrows", "automata", "backgrounds", "calendar",
+%% "chains", "matrix", "mindmap", "patterns", "petri", "shadows", "shapes.geometric",
+%% "shapes.misc", "spy", "trees".
 %%
 %% >>> hyperref packages
 %%
@@ -214,9 +257,12 @@ macros package]
 \fi
 %\graphicspath{{./Img/}}% search path for figures, no need if use scripts to compile
 %%
-%%% >>> Define Some Color Command:
+%%% >>> Page background:
 %%
-%\pagecolor{declared-color} % page background color, require "color" package.
+\ifCOMMONS@background% enable page background
+    \definecolor{backgroundcolor}{RGB}{224,224,224}
+    \pagecolor{backgroundcolor} % page background color, require a color package.
+\fi
 %%
 %%% >>> Layout and Margin
 %%
