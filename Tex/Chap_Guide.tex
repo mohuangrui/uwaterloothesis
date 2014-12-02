@@ -3,7 +3,7 @@
 
 \section{What is \LaTeX{}} % (fold)
 
-\LaTeX{} (pronounced "Lah-tech" or "Lay-tech") is a macro package created by Leslie Lamport based on \TeX{}. As a document preparation system for high-quality typesetting in almost any forms of publishing, \LaTeX{} is not the name of a particular editing program, but refers to the encoding or tagging conventions that are used in \LaTeX{} documents \citep{website:wikipedia,website:latex}.
+\LaTeX{} (pronounced "Lah-tech" or "Lay-tech") is a macro package created by Leslie Lamport based on \TeX{}. As a document preparation system for high-quality typesetting in almost any forms of publishing, \LaTeX{} is not the name of a particular editing program, but refers to the encoding or tagging conventions that are used in \LaTeX{} documents \citep{website:wikipedia,website:latex}. The best resource to learn \LaTeX{} is "\LaTeX{} Wikibook", which is available online.
 
 % section What is \LaTeX{} (end)
 
@@ -26,14 +26,12 @@ You can concentrate purely on the structure and contents of your document, not s
 \section{How to use?} % (fold)
 
 \subsection{Installation} % (fold)
-LaTeX is based on open-source code, so it is available on most computing platforms as free software.
+LaTeX is based on open-source code, so it is available on most computing platforms as free software. If encounter some compiling problems after installation, please Google it. For example, MikTeX may complain about "mathtools.sty", a solution given on "StackExchange" is "The problem is that the package manager has somehow "desynchronized" (even though it's a fresh install). To fix it, run Miktex Package Manager as administrator---"Package Manager (Admin)". Go to Repository--Synchronize. When that completes, your TexWorks should automatically find the needed style files again."
 \begin{itemize}
     \item Linux: TeXLive distribution. 
     \item MacOS: Mactex or TeXLive.
     \item Windows: MikTeX or TeXLive. 
 \end{itemize}
-
-Note: the best resource that can be used to learn \LaTeX{} is "\LaTeX{} Wikibook", which is available online.
 
 Note: to use \LaTeX{}, you need a text editor for writing and editing ".tex" files. To open the ".tex" files in this template, you need a text editor which supports "UTF-8" encoding. Free options for different platforms are the following:
 \begin{itemize}
@@ -91,13 +89,14 @@ Figure~\ref{fig:ITC_Q_Criteria} is an example for including a single figure.
     \end{verbatim}
 \end{center}
 
-Figure~\ref{fig:HC_OASPL} is an example for including multiple figuress. 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\MyFactor\textwidth]{ITC_Q_Criteria}
     \caption{An Example for including a single graph}
     \label{fig:ITC_Q_Criteria}
 \end{figure}
+
+Figure~\ref{fig:HC_OASPL} is an example for including multiple figuress. 
 \begin{center}
     \small
     \begin{verbatim}
