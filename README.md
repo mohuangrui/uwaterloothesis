@@ -1,4 +1,4 @@
-Download: click "Download Zip" at the right corner of webpage.
+Download: click "Download Zip" at the right of this webpage.
 ===============
 uwaterloothesis
 
