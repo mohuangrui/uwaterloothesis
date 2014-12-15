@@ -4,7 +4,7 @@
 %%
 %% this is the "uwaterloothesis.cls" file for "uwaterloothesis" class definition
 %% written by Huangrui Mo <mohuangrui@gmail.com>
-%% $Last-modified: 30 Nov 2014 06:17:32 PM
+%% $Last-modified: 14 Dec 2014 07:38:48 PM
 %%
 %% This program can be redistributed and/or modified under the terms
 %% of the GNU Public License, version 2.
@@ -124,6 +124,7 @@
   \def\UW@value@title{#2}
   %\def\UW@value@titlemark{\MakeUppercase{#1}}}
   \def\UW@value@titlemark{#1}}
+\def\@title{\UW@value@titlemark}
 \renewcommand\author[1]{\def\UW@value@author{#1}}
 \newcommand\degree[1]{\def\UW@value@degree{#1}}
 \newcommand\discipline[1]{\def\UW@value@discipline{#1}}

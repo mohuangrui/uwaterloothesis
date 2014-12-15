@@ -4,7 +4,7 @@
 %%
 %%%%% --------------------------------------------------------------------------------
 %% written by Huangrui Mo <mohuangrui@gmail.com>
-%% $Last-modified: 30 Nov 2014 05:03:48 PM
+%% $Last-modified: 14 Dec 2014 07:54:59 PM
 %%
 %% This program can be redistributed and/or modified under the terms
 %% of the GNU Public License, version 2.
@@ -26,7 +26,7 @@
 %% usage: \usepackage[option1,option2,...,optionN]{commons}
 %% Multiple Options:
 %% [fancyhdr] % configure header and footer by fancydhr package
-%% [uwaterloo] % one available header and footer style, will auto enable fancyhdr
+%% [myhdr] % one available header and footer style, will auto enable fancyhdr
 %% [geometry] % configure page layout by geometry package
 %% [numeric] % enable numeric citation mode replace the default "APA" style
 %% [list] % enable enhanced list environments, useful for Algorithm and Coding
@@ -56,7 +56,9 @@
 %%
 \tableofcontents% contents catalog
 \listoftables% tables catalog
+\intotoc{List of Tables}% add a corresponding item to the contents table and bookmark
 \listoffigures% figures catalog
+\intotoc{List of Figures}% add a corresponding item to the contents table and bookmark
 %%
 %% >>> prematter
 %%
