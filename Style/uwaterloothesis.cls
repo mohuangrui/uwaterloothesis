@@ -4,7 +4,7 @@
 %%
 %% this is the "uwaterloothesis.cls" file for "uwaterloothesis" class definition
 %% written by Huangrui Mo <mohuangrui@gmail.com>
-%% $Last-modified: 14 Dec 2014 07:38:48 PM
+%% $Last-modified: 25 Jun 2015 11:36:48 AM
 %%
 %% This program can be redistributed and/or modified under the terms
 %% of the GNU Public License, version 2.
@@ -66,21 +66,24 @@
 %%
 %% set margins to minimum permitted by uWaterloo thesis regulations:
 %% part one -- horizontal widths
+%% left side width + textwidth + right side width = paperwidth
+%% left side width of [odd, even] page = [odd, even]sidemargin + 1.0in (fixed)
+%% binding side width + textwidth + nonbinding side width = paperwidth
+%% binding side width of [odd, even] page = [left, right] side width
+%% assuming US letter paper (8.5in. x 11in.)
+\setlength{\textwidth}{6.375in}% set required text width first
 \ifUW@printcopy% if print copy layout enabled
-  \setlength{\oddsidemargin}{0.125in}% ensure binding side at least 0.125in + 1.0in (fixed)
-  \setlength{\evensidemargin}{0in}% ensure a uniform binding width for two-sided printed copy
+  \setlength{\oddsidemargin}{0.125in}% binding side width 0.125in + 1.0in (fixed)
+  \setlength{\evensidemargin}{0in}% ensure uniform binding side width for two-sided printed copy
 \else
-  \setlength{\oddsidemargin}{0.125in}% ensure binding side at least 1.125in
-  \setlength{\evensidemargin}{0.125in}% ensure a uniform left margin for EThesis when two-sided
+  \setlength{\oddsidemargin}{0.125in}% left side width 0.125in + 1.0in (fixed)
+  \setlength{\evensidemargin}{0.125in}% ensure uniform left side width for EThesis
 \fi
-%% set margin for notes to zero to get the maximum textwidth
+%% set margin for notes to zero
 \setlength{\marginparwidth}{0pt}% width of margin notes
 \setlength{\marginparsep}{0pt}% width of space between body text and margin notes
-%% assuming US letter paper (8.5in. x 11in.) and note margins as above
-%% if note margins are 0, then \textwidth should be \paperwidth - 2*1.0in - \oddsidemargin
-\setlength{\textwidth}{6.375in}% text width
 %% part two -- vertical heights
-\setlength{\headheight}{13.6pt}% set a minimum header height
+\setlength{\headheight}{14.5pt}% set a minimum header height
 \raggedbottom
 %% specifies the amount of space between paragraphs.
 %% other reasonable specifications are \bigskipamount and \smallskipamount.
