@@ -1,13 +1,12 @@
 %%%%% --------------------------------------------------------------------------------
 %%
-%%%%***************************** version information *********************************
+%%%%***************************** version information ********************************
 %%
-%% this is the "uwaterloothesis.cls" file for "uwaterloothesis" class definition
-%% written by Huangrui Mo <mohuangrui@gmail.com>
-%% $Last-modified: 25 Jun 2015 11:36:48 AM
-%%
-%% This program can be redistributed and/or modified under the terms
-%% of the GNU Public License, version 2.
+%% Copyright (C) 2014-2018 Huangrui Mo <huangrui.mo@gmail.com> 
+%% This is free software: you can redistribute it and/or modify it
+%% under the terms of the GNU General Public License as published by
+%% the Free Software Foundation, either version 3 of the License, or
+%% (at your option) any later version.
 %%
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{uwaterloothesis}
@@ -118,7 +117,7 @@
   \begin{center}%
     {\bfseries #1}
   \end{center}%
-  }
+}
 %%%%% --------------------------------------------------------------------------------
 %%
 %%%%******************* commands of titlepage items **********************************
