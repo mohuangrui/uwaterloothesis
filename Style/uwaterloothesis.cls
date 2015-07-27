@@ -88,7 +88,7 @@
 %% other reasonable specifications are \bigskipamount and \smallskipamount.
 \setlength{\parskip}{\medskipamount}
 %% line spacing
-\renewcommand{\baselinestretch}{1} % this is the default line space setting
+%\renewcommand{\baselinestretch}{1} % this is the default line space setting
 %% default pagestyle is page number at bottom without headers and footers
 \pagestyle{plain}
 %%%%% --------------------------------------------------------------------------------
