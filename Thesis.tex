@@ -13,9 +13,8 @@
 %%%%*************************Document Class Declaration*******************************
 %%
 \documentclass[doublesided]{uwaterloothesis}% thesis template of University of Waterloo
-%% Multiple Options:
-%% [doublesided] % change to double-sided style, default is single-sided
-%% [printcopy] % if printed, need this for a uniform binding width
+%% Multiple optional arguments:
+%% [<doublesided|printcopy] % single-sided (default), double-sided, or print layout 
 %% [draftversion] % show draft version information, default is no show
 %% [standard options for book class]
 %%%%% --------------------------------------------------------------------------------
@@ -24,10 +23,11 @@
 %%
 \usepackage{commons}% common settings
 %% usage: \usepackage[option1,option2,...,optionN]{commons}
-%% Multiple Options:
-%% [numbered] % default citation style. textual: Jones [1]; parenthetical: [1]
-%% [authoryear] % author year citation style. textual: Jones (1995); parenthetical: (Jones, 1995)
-%% [alpha] % alpha citation style. textual: not available; parenthetical: [Jon95]
+%% Multiple optional arguments:
+%% [<numbered|authoryear|alpha>] % citation and reference style
+%% <numbered>: textual: Jones [1]; parenthetical: [1]. default style
+%% <authoryear>: textual: Jones (1995); parenthetical: (Jones, 1995)
+%% <alpha>: textual: not available; parenthetical: [Jon95]
 %% [myhdr] % one available header and footer style, will enable fancyhdr
 %% [lscape] % provide landscape layout environment
 %% [geometry] % configure page layout by geometry package
