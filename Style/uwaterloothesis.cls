@@ -73,12 +73,13 @@
 %% binding side width + textwidth + nonbinding side width = paperwidth
 %% binding side width of [odd, even] page = [left, right] side width
 %% assuming US letter paper (8.5in. x 11in.)
+\setlength{\textwidth}{6in}% set required text width first
 \ifUW@printcopy% if print copy layout enabled
-  \setlength{\oddsidemargin}{0.6in}% binding side width 0.6in + 1.0in (fixed)
-  \setlength{\evensidemargin}{0in}% ensure uniform binding side width for two-sided printed copy
+  \setlength{\oddsidemargin}{0.5in}% binding side width
+  \setlength{\evensidemargin}{0in}% ensure uniform binding side width for printing
 \else
-  \setlength{\oddsidemargin}{0.6in}% left side width 0.6in + 1.0in (fixed)
-  \setlength{\evensidemargin}{0.6in}% ensure uniform left side width for EThesis
+  \setlength{\oddsidemargin}{0.25in}% left side width
+  \setlength{\evensidemargin}{0.25in}% ensure uniform left side width for EThesis
 \fi
 %% set margin for notes to zero
 \setlength{\marginparwidth}{0pt}% width of margin notes
