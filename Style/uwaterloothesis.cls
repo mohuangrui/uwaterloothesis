@@ -21,6 +21,10 @@
 \DeclareOption{draftversion}{% draft information reminder
   \UW@versioninfotrue%
 }
+\newif\ifUW@singlesided \UW@singlesidedfalse
+\DeclareOption{singlesided}{% enable single-sided printing
+  \UW@singlesidedtrue%
+}
 \newif\ifUW@doublesided \UW@doublesidedfalse
 \DeclareOption{doublesided}{% enable double-sided printing
   \UW@doublesidedtrue%
@@ -63,30 +67,26 @@
 %%
 %%%%******************************* page layout **************************************
 %%
-%% set margins to minimum permitted by uWaterloo thesis regulations:
 %% part one -- horizontal widths
 %% left side width + textwidth + right side width = paperwidth
 %% left side width of [odd, even] page = [odd, even]sidemargin + 1.0in (fixed)
 %% binding side width + textwidth + nonbinding side width = paperwidth
 %% binding side width of [odd, even] page = [left, right] side width
 %% assuming US letter paper (8.5in. x 11in.)
-\setlength{\textwidth}{6.375in}% set required text width first
 \ifUW@printcopy% if print copy layout enabled
-  \setlength{\oddsidemargin}{0.125in}% binding side width 0.125in + 1.0in (fixed)
+  \setlength{\oddsidemargin}{0.6in}% binding side width 0.6in + 1.0in (fixed)
   \setlength{\evensidemargin}{0in}% ensure uniform binding side width for two-sided printed copy
 \else
-  \setlength{\oddsidemargin}{0.125in}% left side width 0.125in + 1.0in (fixed)
-  \setlength{\evensidemargin}{0.125in}% ensure uniform left side width for EThesis
+  \setlength{\oddsidemargin}{0.6in}% left side width 0.6in + 1.0in (fixed)
+  \setlength{\evensidemargin}{0.6in}% ensure uniform left side width for EThesis
 \fi
 %% set margin for notes to zero
 \setlength{\marginparwidth}{0pt}% width of margin notes
 \setlength{\marginparsep}{0pt}% width of space between body text and margin notes
 %% part two -- vertical heights
 \setlength{\headheight}{14.5pt}% set a minimum header height
-\raggedbottom
 %% specifies the amount of space between paragraphs.
-%% other reasonable specifications are \bigskipamount and \smallskipamount.
-\setlength{\parskip}{\medskipamount}
+\setlength{\parskip}{0.5ex plus 0.25ex minus 0.25ex}
 %% line spacing
 %\renewcommand{\baselinestretch}{1} % this is the default line space setting
 %% default pagestyle is page number at bottom without headers and footers
