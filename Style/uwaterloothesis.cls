@@ -69,7 +69,7 @@
 %%
 %% part one -- horizontal widths
 %% left side width + textwidth + right side width = paperwidth
-%% left side width of [odd, even] page = [odd, even]sidemargin + 1.0in (fixed)
+%% left side width of [odd, even] page = [odd, even]sidemargin + 1.0in (fixed) + hoffset
 %% binding side width + textwidth + nonbinding side width = paperwidth
 %% binding side width of [odd, even] page = [left, right] side width
 %% assuming US letter paper (8.5in. x 11in.)
@@ -85,11 +85,15 @@
 \setlength{\marginparwidth}{0pt}% width of margin notes
 \setlength{\marginparsep}{0pt}% width of space between body text and margin notes
 %% part two -- vertical heights
-\setlength{\headheight}{14.5pt}% set a minimum header height
+%% top height + textheight + bottom height = paperheight
+%% top height = 1.0in (fixed) + voffset + topmargin + headheight + headsep 
+\setlength{\textheight}{220mm}% set required text height first
+\setlength{\voffset}{-15mm}% set a minimum header height
+\setlength{\headheight}{15pt}% set a minimum header height
 %% specifies the amount of space between paragraphs.
 \setlength{\parskip}{0.5ex plus 0.25ex minus 0.25ex}
 %% line spacing
-%\renewcommand{\baselinestretch}{1} % this is the default line space setting
+%%\renewcommand{\baselinestretch}{1} % this is the default line space setting
 %% default pagestyle is page number at bottom without headers and footers
 \pagestyle{plain}
 %%%%% --------------------------------------------------------------------------------
@@ -194,10 +198,6 @@
 \newenvironment{dedication}
   {\prechapter{\UW@label@dedication}\begin{center}\bigskip\itshape}
   {\end{center}\cleardoublepage}
-%% nomenclature
-\newenvironment{nomenclature}
-  {\chapter{\UW@label@nomenclature}}
-  {\cleardoublepage}
 %%%%% --------------------------------------------------------------------------------
 \endinput
 %% End of file `uwaterloothesis'.

@@ -1,0 +1,27 @@
+\begin{thebibliography}{4}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\url{#1}\endgroup}\fi
+\providecommand{\bibinfo}[2]{#2}
+
+\bibitem[{Wikipedia(2014)}]{website:wikipedia}
+\bibinfo{author}{Wikipedia}, \bibinfo{title}{LaTeX},
+  \bibinfo{journal}{http://en.wikipedia.org/wiki/LaTeX} .
+
+\bibitem[{LaTeX(2014)}]{website:latex}
+\bibinfo{author}{LaTeX}, \bibinfo{title}{LaTeX -- A document preparation
+  system}, \bibinfo{journal}{http://www.latex-project.org/} .
+
+\bibitem[{Wikibook(2014)}]{website:wikibook}
+\bibinfo{author}{Wikibook}, \bibinfo{title}{LaTeX},
+  \bibinfo{journal}{http://en.wikibooks.org/wiki/LaTeX} .
+
+\bibitem[{Lamport(1986)}]{lamport1986document}
+\bibinfo{author}{L.~Lamport}, \bibinfo{title}{Document Preparation System},
+  \bibinfo{publisher}{Addison-Wesley Reading, MA}, \bibinfo{year}{1986}.
+
+\end{thebibliography}
