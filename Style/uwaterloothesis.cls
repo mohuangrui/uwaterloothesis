@@ -101,6 +101,10 @@
 %%
 %%%%********************* some style control commands ********************************
 %%
+%% redefine cleardoublepage to empty pages
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+    \thispagestyle{empty}%
+\hbox{}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
 %% define prechapter command
 \newcommand\prechapter[1]{%
   \pagestyle{plain}
