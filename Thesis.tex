@@ -21,7 +21,7 @@
 %%
 %%%%**************************Command Define and Settings*****************************
 %%
-\usepackage[myhdr]{commons}% common settings
+\usepackage[myhdr,list]{commons}% common settings
 %% usage: \usepackage[option1,option2,...,optionN]{commons}
 %% Multiple optional arguments:
 %% [<numbered|authoryear|alpha>] % citation and reference style
@@ -58,10 +58,10 @@
 %%% >>> List of Content
 %%
 \tableofcontents% contents catalog
-\listoftables% tables catalog
 \intotoc{List of Tables}% add a corresponding item to the contents table and bookmark
-\listoffigures% figures catalog
+\listoftables% tables catalog
 \intotoc{List of Figures}% add a corresponding item to the contents table and bookmark
+\listoffigures% figures catalog
 %%
 %% >>> prematter
 %%
@@ -93,8 +93,8 @@
 %%
 %%% >>> Bibliography
 %%
-\bibliography{Myrefs}%
 \intotoc{References}% add a corresponding item to the contents table and bookmark
+\bibliography{Myrefs}%
 %%
 \end{document}
 %%%%% --------------------------------------------------------------------------------
