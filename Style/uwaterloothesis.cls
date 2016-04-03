@@ -1,6 +1,6 @@
 %%%%% --------------------------------------------------------------------------------
 %%
-%%%%***************************** version information ********************************
+%%%%***************************** Version Information ********************************
 %%
 %% Copyright (C) 2014-2018 Huangrui Mo <huangrui.mo@gmail.com> 
 %% This is free software: you can redistribute it and/or modify it
@@ -41,7 +41,7 @@
 \ProcessOptions\relax
 %%%%% --------------------------------------------------------------------------------
 %%
-%%%%*************************** loadclass infomation *********************************
+%%%%*************************** Loadclass Infomation *********************************
 %%
 \ifUW@doublesided% if double-sided printing enabled
   \LoadClass[letterpaper,12pt,openright,twoside]{book}
@@ -50,13 +50,13 @@
 \fi
 %%%%% --------------------------------------------------------------------------------
 %%
-%%%%***************************** package infomation *********************************
+%%%%***************************** Package Infomation *********************************
 %%
 %% math packages
 \RequirePackage{amsmath,amssymb,amstext}
 %%%%% --------------------------------------------------------------------------------
 %%
-%%%%************************ load class configuretion ********************************
+%%%%************************ Load Class Configuretion ********************************
 %%
 \AtEndOfPackage{%class cfg loaded after package, makes commands at preamble take effect
   \makeatletter
@@ -65,7 +65,7 @@
 }
 %%%%% --------------------------------------------------------------------------------
 %%
-%%%%******************************* page layout **************************************
+%%%%******************************* Page Layout **************************************
 %%
 %% part one -- horizontal widths
 %% left side width + textwidth + right side width = paperwidth
@@ -99,7 +99,7 @@
 \pagestyle{plain}
 %%%%% --------------------------------------------------------------------------------
 %%
-%%%%********************* some style control commands ********************************
+%%%%********************* Some Style Control Commands ********************************
 %%
 %% redefine cleardoublepage to empty pages
 \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
@@ -114,7 +114,7 @@
 }
 %%%%% --------------------------------------------------------------------------------
 %%
-%%%%******************* commands of titlepage items **********************************
+%%%%******************* Commands of Titlepage Items **********************************
 %%
 \renewcommand\title[2][\UW@value@title]{%
   \def\UW@value@title{#2}
@@ -126,7 +126,7 @@
 \newcommand\discipline[1]{\def\UW@value@discipline{#1}}
 %%%%% --------------------------------------------------------------------------------
 %%
-%%%%*************************** titlepage configuration ******************************
+%%%%*************************** Titlepage Configuration ******************************
 %%
 \renewcommand\maketitle{%
   \cleardoublepage
@@ -185,7 +185,7 @@
 }
 %%%%% --------------------------------------------------------------------------------
 %%
-%%%%****************************** new environments **********************************
+%%%%****************************** New Environments **********************************
 %%
 %% author's declaration
 \newenvironment{declaration}
