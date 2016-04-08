@@ -57,11 +57,11 @@
 %%
 %%% >>> List of Content
 %%
-\intotoc{Contents}% add a corresponding item to the contents table and bookmark
+\intotoc{\contentsname}% add a corresponding item to the contents table and bookmark
 \tableofcontents% contents catalog
-\intotoc{List of Tables}% add a corresponding item to the contents table and bookmark
+\intotoc{\listfigurename}% add a corresponding item to the contents table and bookmark
 \listoftables% tables catalog
-\intotoc{List of Figures}% add a corresponding item to the contents table and bookmark
+\intotoc{\listtablename}% add a corresponding item to the contents table and bookmark
 \listoffigures% figures catalog
 %%
 %% >>> prematter
@@ -83,6 +83,7 @@
 %%%%******************************** Appendix ****************************************
 %%
 %% Some subordinate chapters.
+\cleardoublepage
 \appendix%
 \input{Appendix}%
 %%%%% --------------------------------------------------------------------------------
@@ -94,7 +95,7 @@
 %%
 %%% >>> Bibliography
 %%
-\intotoc{References}% add a corresponding item to the contents table and bookmark
+\intotoc{\bibname}% add a corresponding item to the contents table and bookmark
 \bibliography{Myrefs}%
 %%
 \end{document}
