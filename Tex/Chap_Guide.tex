@@ -49,10 +49,6 @@ After downloading this template and installing a \LaTeX{} distribution. It's tim
     \item Windows: run Compile.bat
 \end{itemize}
 
-Note: It's recommended to use the provided scripts to compile your \LaTeX{} files. It will automatically search and include files without explicitly specifying relative paths. If you do not use them for compilation, you need to specify the relative path in each "\verb+\input{ }+" command, or the \LaTeX{} will complain that it can not find some files.
-
-Note: the bash script "Compile.sh" hasn't been tested on MacOS. If there are some errors, please give me your feedback, thank you so much.
-
 % subsection Give a try (end)
 
 \subsection{Include math} % (fold)
@@ -82,7 +78,7 @@ Figure~\ref{fig:ITC_Q_Criteria} is an example for including a single figure.
     \begin{verbatim}
         \begin{figure}[!htbp]
             \centering
-            \includegraphics[width=\MyFactor\textwidth]{ITC_Q_Criteria}
+            \includegraphics[width=0.45\textwidth]{ITC_Q_Criteria}
             \caption{An Example for including a single figure}
             \label{fig:ITC_Q_Criteria}
         \end{figure}
@@ -91,7 +87,7 @@ Figure~\ref{fig:ITC_Q_Criteria} is an example for including a single figure.
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\MyFactor\textwidth]{ITC_Q_Criteria}
+    \includegraphics[width=0.45\textwidth]{ITC_Q_Criteria}
     \caption{An Example for including a single graph}
     \label{fig:ITC_Q_Criteria}
 \end{figure}
@@ -102,25 +98,25 @@ Figure~\ref{fig:HC_OASPL} is an example for including multiple figuress.
     \begin{verbatim}
         \begin{figure}[!htbp]
             \centering
-            \begin{subfigure}[b]{\MySubFactor\textwidth}
+            \begin{subfigure}[b]{0.45\textwidth}
                 \includegraphics[width=\textwidth]{HC_OASPL_A}
                 \caption{}
                 \label{fig:HC_OASPL_A}
             \end{subfigure}%
             ~% add a small space
-            \begin{subfigure}[b]{\MySubFactor\textwidth}
+            \begin{subfigure}[b]{0.45\textwidth}
                 \includegraphics[width=\textwidth]{HC_OASPL_B}
                 \caption{}
                 \label{fig:HC_OASPL_B}
             \end{subfigure}%
             \\% change line
-            \begin{subfigure}[b]{\MySubFactor\textwidth}
+            \begin{subfigure}[b]{0.45\textwidth}
                 \includegraphics[width=\textwidth]{HC_OASPL_C}
                 \caption{}
                 \label{fig:HC_OASPL_C}
             \end{subfigure}%
             ~% add a small space
-            \begin{subfigure}[b]{\MySubFactor\textwidth}
+            \begin{subfigure}[b]{0.45\textwidth}
                 \includegraphics[width=\textwidth]{HC_OASPL_D}
                 \caption{}
                 \label{fig:HC_OASPL_D}
@@ -132,25 +128,25 @@ Figure~\ref{fig:HC_OASPL} is an example for including multiple figuress.
 \end{center}
 \begin{figure}[!htbp]
     \centering
-    \begin{subfigure}[b]{\MySubFactor\textwidth}
+    \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{HC_OASPL_A}
         \caption{}
         \label{fig:HC_OASPL_A}
     \end{subfigure}%
     ~% add a small space
-    \begin{subfigure}[b]{\MySubFactor\textwidth}
+    \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{HC_OASPL_B}
         \caption{}
         \label{fig:HC_OASPL_B}
     \end{subfigure}%
     \\% change line
-    \begin{subfigure}[b]{\MySubFactor\textwidth}
+    \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{HC_OASPL_C}
         \caption{}
         \label{fig:HC_OASPL_C}
     \end{subfigure}%
     ~% add a small space
-    \begin{subfigure}[b]{\MySubFactor\textwidth}
+    \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{HC_OASPL_D}
         \caption{}
         \label{fig:HC_OASPL_D}

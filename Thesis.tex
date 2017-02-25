@@ -12,7 +12,7 @@
 %%
 %%%%************************ Document Class Declaration ******************************
 %%
-\documentclass[doublesided]{uwaterloothesis}% thesis template of University of Waterloo
+\documentclass[doublesided]{Style/uwaterloothesis}% thesis template of University of Waterloo
 %% Multiple optional arguments:
 %% [<singlesided|doublesided|printcopy>] % single-sided, double-sided, or print layout
 %% [draftversion] % show draft version information, default is no show
@@ -21,7 +21,7 @@
 %%
 %%%%************************* Command Define and Settings ****************************
 %%
-\usepackage[myhdr,list]{commons}% common settings
+\usepackage[myhdr,list]{Style/commons}% common settings
 %% usage: \usepackage[option1,option2,...,optionN]{commons}
 %% Multiple optional arguments:
 %% [<numbered|authoryear|alpha>] % citation and reference style
@@ -37,7 +37,7 @@
 %% [tikz] % enable tikz for complex diagrams, will auto enbale color package
 %% [table] % enable a table package for complex tables, default is ctable
 %% [math] % enable some extra math packages
-\usepackage{custom}% user defined commands
+\usepackage{Style/custom}% user defined commands
 %%%%% --------------------------------------------------------------------------------
 %%
 %%%%******************************** Content *****************************************
@@ -53,7 +53,7 @@
 %%
 %% >>> Frontpages
 %%
-\input{Frontpages}
+\input{Tex/Frontpages}
 %%
 %%% >>> List of Content
 %%
@@ -66,7 +66,7 @@
 %%
 %% >>> prematter
 %%
-\input{Prematter}% list of symbols, preface of books
+\input{Tex/Prematter}% list of symbols, preface of books
 %%
 %%%%% --------------------------------------------------------------------------------
 %%
@@ -77,7 +77,7 @@
 %%
 %%% >>> Main Contents
 %%
-\input{Main_Content}%
+\input{Tex/Main_Content}%
 %%%%% --------------------------------------------------------------------------------
 %%
 %%%%******************************** Appendix ****************************************
@@ -85,7 +85,7 @@
 %% Some subordinate chapters.
 \cleardoublepage
 \appendix%
-\input{Appendix}%
+\input{Tex/Appendix}%
 %%%%% --------------------------------------------------------------------------------
 %%
 %%%%******************************* Backmatter ***************************************
@@ -96,7 +96,7 @@
 %%% >>> Bibliography
 %%
 \intotoc{\bibname}% add a corresponding item to the contents table and bookmark
-\bibliography{ref}%
+\bibliography{Biblio/ref}%
 %%
 \end{document}
 %%%%% --------------------------------------------------------------------------------

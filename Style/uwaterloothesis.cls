@@ -60,7 +60,7 @@
 %%
 \AtEndOfPackage{%class cfg loaded after package, makes commands at preamble take effect
   \makeatletter
-  \InputIfFileExists{uwaterloothesis.cfg}{}{}
+  \InputIfFileExists{Style/uwaterloothesis.cfg}{}{}
   \makeatother
 }
 %%%%% --------------------------------------------------------------------------------
