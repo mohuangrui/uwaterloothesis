@@ -1,6 +1,6 @@
-Download: click "Download Zip" at the right of this webpage.
-===============
-uwaterloothesis
+# `uwaterloothesis` LaTeX Thesis Template for The University of Waterloo
 
-Latex Thesis Template for The University of Waterloo
+## Download
+
+**Clone or download -> Download Zip**
 

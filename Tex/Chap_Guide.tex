@@ -1,11 +1,9 @@
 \chapter{A Brief Guide}
 \label{chap:guide}
 
-\section{What is \LaTeX{}} % (fold)
+\section{What is \LaTeX{}}
 
 \LaTeX{} (pronounced "Lah-tech" or "Lay-tech") is a macro package created by Leslie Lamport based on \TeX{}. As a document preparation system for high-quality typesetting in almost any forms of publishing, \LaTeX{} is not the name of a particular editing program, but refers to the encoding or tagging conventions that are used in \LaTeX{} documents \citep{website:wikipedia,website:latex}. The best resource to learn \LaTeX{} is "\LaTeX{} Wikibook", which is available online.
-
-% section What is \LaTeX{} (end)
 
 \section{Why use \LaTeX?}
 
@@ -23,9 +21,9 @@ You can concentrate purely on the structure and contents of your document, not s
     \label{fig:compare}
 \end{figure}
 
-\section{How to use?} % (fold)
+\section{How to use?}
 
-\subsection{Installation} % (fold)
+\subsection{Installation}
 LaTeX is based on open-source code, so it is available on most computing platforms as free software. If encounter some compiling problems after installation, please Google it. For example, MikTeX may complain about "mathtools.sty", a solution given on "StackExchange" is "The problem is that the package manager has somehow "desynchronized" (even though it's a fresh install). To fix it, run Miktex Package Manager as administrator---"Package Manager (Admin)". Go to Repository--Synchronize. When that completes, your TexWorks should automatically find the needed style files again."
 \begin{itemize}
     \item Linux: TeXLive distribution. 
@@ -39,19 +37,8 @@ Note: to use \LaTeX{}, you need a text editor for writing and editing ".tex" fil
     \item MacOS: TeXShop, Macvim.
     \item Windows: Texmaker, Gvim, Notepad++. 
 \end{itemize}
-% subsection Installation (end)
 
-\subsection{Give a try} % (fold)
-After downloading this template and installing a \LaTeX{} distribution. It's time to have a try:
-\begin{itemize}
-    \item Linux: run Compile.sh
-    \item MacOS: run Compile.sh
-    \item Windows: run Compile.bat
-\end{itemize}
-
-% subsection Give a try (end)
-
-\subsection{Include math} % (fold)
+\subsection{Include math}
 \LaTeX{} realization of Equation~\ref{eq:N-S_equation} is something like this:
 \begin{center}
     \small
@@ -67,9 +54,8 @@ After downloading this template and installing a \LaTeX{} distribution. It's tim
 \begin{equation}\label{eq:N-S_equation}
     \frac{\partial (\rho\mathbf{v})}{\partial t} + \nabla \cdot (\rho \mathbf{v} \mathbf{v}) = -\nabla p + \nabla \cdot\mathbf{T} + \mathbf{f}. 
 \end{equation}    
-% subsection Include math (end)
 
-\subsection{Include Graphics} % (fold)
+\subsection{Include Graphics}
 Note: inluding figures may seem to be scary by looking at the codes. However, the fact is that you only need to modify the names in each part, the rest are simply copy and paste. These codes are all available in the file "Useful Commands.txt".
 
 Figure~\ref{fig:ITC_Q_Criteria} is an example for including a single figure.
@@ -154,9 +140,8 @@ Figure~\ref{fig:HC_OASPL} is an example for including multiple figuress.
     \caption{An Example for including multiple figures}
     \label{fig:HC_OASPL}
 \end{figure}
-% subsection Include Graphics (end)
 
-\subsection{Include a citation} % (fold)
+\subsection{Include a citation}
 Suppose you are going to cite an article named "Document Preparation System", the procedures are:
 \begin{itemize}
     \item Use Google Scholar search "Document Preparation System".
@@ -166,17 +151,15 @@ Suppose you are going to cite an article named "Document Preparation System", th
     \item Citation dominant: cite this article by \verb+\citet{lamport1986document}+ like here \citet{lamport1986document}
     \item References list is generated automatically.
 \end{itemize}
-% subsection Include a citation (end)
-\subsection{Generate nomenclature} % (fold)
+
+\subsection{Generate nomenclature}
 In this template, a simple command for adding nomenclatures is provided. Therefore, packages for automatical nomenclature generation are not included. From my point of view, there is no need to use those packages and make things complicated. However, if you insist, there are a lot of available packages for creating nomenclatures. Recommended options are (Please Google the one you want to know):
 \begin{itemize}
     \item listofsymbols
     \item nomencl
 \end{itemize}
-% subsection Generate nomenclature automatically (end)
-% section How to use? (end)
 
-\section{File Tree of Current Template} % (fold)
+\section{File Tree of Current Template}
 \begin{itemize}
     \item Thesis.tex: main tex file, which acts like the main function in C++.
     \item Style: Store template configuration files, which act like subfunctions.
@@ -197,46 +180,9 @@ In this template, a simple command for adding nomenclatures is provided. Therefo
 Note: this template can be easily adapted to other writing purposes such as articles. What you need to do is to change and adjust a few items in the "Thesis.tex" file, which would be very easy after you are a little familiar with using \LaTeX{}. Like :
 
 Change \verb+\documentclass{uwaterloothesis}+ to \verb+\documentclass{article}+
-% section File Tree of Current Template (end)
 
-Note: available options for configureing current template.
-\begin{footnotesize}
-\begin{verbatim}
-%%%%% --------------------------------------------------------------------------------
-%%
-%%%%*************************Document Class Declaration*******************************
-%%
-\documentclass[doublesided]{uwaterloothesis}% thesis template of University of Waterloo
-%% Multiple Options:
-%% [doublesided] % change to double-sided style, default is single-sided
-%% [printcopy] % if printed, need this for a uniform binding width
-%% [draftversion] % show draft version information, default is no show
-%% [standard options for book class]
-%%%%% --------------------------------------------------------------------------------
-%%
-%%%%**************************Command Define and Settings*****************************
-%%
-\usepackage{commons}% common settings
-%% usage: \usepackage[option1,option2,...,optionN]{commons}
-%% Multiple Options:
-%% [fancyhdr] % configure header and footer by fancydhr package
-%% [uwaterloo] % one available header and footer style, will auto enable fancyhdr
-%% [geometry] % configure page layout by geometry package
-%% [numeric] % enable numeric citation mode replace the default "APA" style
-%% [list] % enable enhanced list environments, useful for Algorithm and Coding
-%% [color] % enable color package to use color, current package is xcolor
-%% [background] % enable page background, will auto enable color package
-%% [tikz] % enable tikz for complex diagrams, will auto enbale color package
-%% [table] % enable a table package for complex tables, current is ctable
-\usepackage{custom}% user defined commands
-\end{verbatim}
-\end{footnotesize}
-
-\section{Feedback and Problems} % (fold)
+\section{Feedback and Problems}
 Please feel free to send me emails for any related problems:
 \begin{center}
 huangrui.mo@uwaterloo.ca
 \end{center}
-% section Feedback and Problems (end)
-%%%%% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-%%%%% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
