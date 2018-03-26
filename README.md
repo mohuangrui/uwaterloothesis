@@ -1,4 +1,6 @@
-# `uwaterloothesis` LaTeX Thesis Template for The University of Waterloo
+# `uwaterloothesis`
+
+LaTeX Thesis Template for The University of Waterloo
 
 ## Download
 
