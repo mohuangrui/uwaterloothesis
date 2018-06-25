@@ -11,7 +11,7 @@
 %---------------------------------------------------------------------------%
 %->> Identification
 %---------------------------------------------------------------------------%
-\NeedsTeXFormat{LaTeX2e}[1995/12/01]%
+\NeedsTeXFormat{LaTeX2e}%
 \ProvidesClass{uwaterloothesis}[2014/10/01 v0.1 LaTeX document class]%
 %---------------------------------------------------------------------------%
 %->> Declare options
@@ -19,25 +19,25 @@
 %-
 %-> Layout
 %-
-\newif\ifUW@singlesided \UW@singlesidedfalse
+\newif\ifuw@singlesided \uw@singlesidedfalse
 \DeclareOption{singlesided}{% enable single-sided printing
-    \UW@singlesidedtrue%
+    \uw@singlesidedtrue%
 }
-\newif\ifUW@doublesided \UW@doublesidedfalse
+\newif\ifuw@doublesided \uw@doublesidedfalse
 \DeclareOption{doublesided}{% enable double-sided printing
-    \UW@doublesidedtrue%
+    \uw@doublesidedtrue%
 }
-\newif\ifUW@printcopy \UW@printcopyfalse
+\newif\ifuw@printcopy \uw@printcopyfalse
 \DeclareOption{printcopy}{% enable print copy layout
-    \UW@doublesidedtrue% auto enable double-sided style
-    \UW@printcopytrue%
+    \uw@doublesidedtrue% auto enable double-sided style
+    \uw@printcopytrue%
 }
 %-
 %-> Draft version info
 %-
-\newif\ifUW@versioninfo \UW@versioninfofalse
+\newif\ifuw@versioninfo \uw@versioninfofalse
 \DeclareOption{draftversion}{%
-    \UW@versioninfotrue%
+    \uw@versioninfotrue%
 }
 %-
 %-> Handle non-implemented options
@@ -52,7 +52,7 @@
 %---------------------------------------------------------------------------%
 %->> Load class information
 %---------------------------------------------------------------------------%
-\ifUW@doublesided% if double-sided printing enabled
+\ifuw@doublesided% if double-sided printing enabled
     \LoadClass[letterpaper,12pt,openright,twoside]{book}
 \else% if double-sided printing isn't enabled
     \LoadClass[letterpaper,12pt,oneside]{book}
@@ -79,7 +79,7 @@
 %- assuming US letter paper (8.5in. x 11in.)
 \setlength{\textwidth}{6in}% set required text width first
 \setlength{\hoffset}{0mm}% set horizontal offset
-\ifUW@printcopy% if print copy layout enabled
+\ifuw@printcopy% if print copy layout enabled
     \setlength{\oddsidemargin}{0.5in}% binding side margin
     \setlength{\evensidemargin}{0in}% ensure uniform binding side width for printing
 \else
@@ -126,15 +126,15 @@
 %-
 %-> Item commands
 %-
-\renewcommand{\title}[2][\UW@value@title]{%
-    \def\UW@value@title{#2}%
-    %\def\UW@value@titlemark{\MakeUppercase{#1}}}%
-    \def\UW@value@titlemark{#1}%
+\renewcommand{\title}[2][\uw@value@title]{%
+    \def\uw@value@title{#2}%
+    %\def\uw@value@titlemark{\MakeUppercase{#1}}}%
+    \def\uw@value@titlemark{#1}%
 }
-\renewcommand{\@title}{\UW@value@titlemark}
-\renewcommand{\author}[1]{\def\UW@value@author{#1}}
-\newcommand{\degree}[1]{\def\UW@value@degree{#1}}
-\newcommand{\discipline}[1]{\def\UW@value@discipline{#1}}
+\renewcommand{\@title}{\uw@value@titlemark}
+\renewcommand{\author}[1]{\def\uw@value@author{#1}}
+\newcommand{\degree}[1]{\def\uw@value@degree{#1}}
+\newcommand{\discipline}[1]{\def\uw@value@discipline{#1}}
 %-
 %-> Redefine style
 %-
@@ -146,7 +146,7 @@
         \vspace*{1.0cm}
 
         \Huge
-        {\bf \UW@value@title}
+        {\bf \uw@value@title}
 
         \vspace*{1.0cm}
 
@@ -156,25 +156,25 @@
         \vspace*{1.0cm}
 
         \Large
-        {\UW@value@author}
+        {\uw@value@author}
 
         \vspace*{3.0cm}
 
         \normalsize
-        {\UW@value@statement}
+        {\uw@value@statement}
 
         \vspace*{2.0cm}
 
-        {\UW@value@school}
+        {\uw@value@school}
 
         \vspace*{1.0cm}
 
-        {\copyright\ \UW@value@author\ \the\year}
+        {\copyright\ \uw@value@author\ \the\year}
     \end{center}
     \clearpage
     \if@twoside
         \thispagestyle{empty}
-        \ifUW@versioninfo
+        \ifuw@versioninfo
             \vspace*{\stretch{1}}
             \begin{footnotesize}
                 \noindent
@@ -183,7 +183,7 @@
         \fi
         \cleardoublepage
     \else
-        \ifUW@versioninfo
+        \ifuw@versioninfo
             \thispagestyle{empty}
             \vspace*{\stretch{1}}
             \begin{footnotesize}
@@ -199,27 +199,27 @@
 %---------------------------------------------------------------------------%
 %- examining committee membership
 \newenvironment{committee}
-{\prechapter{\UW@label@committee}}
+{\prechapter{\uw@label@committee}}
 {\cleardoublepage}
 %- author's declaration
 \newenvironment{declaration}
-{\prechapter{\UW@label@declaration}}
+{\prechapter{\uw@label@declaration}}
 {\cleardoublepage}
 %- statement of contribution
 \newenvironment{contribute}
-{\prechapter{\UW@label@contribute}}
+{\prechapter{\uw@label@contribute}}
 {\cleardoublepage}
 %- abstract
 \newenvironment{abstract}
-{\prechapter{\UW@label@abstract}}
+{\prechapter{\uw@label@abstract}}
 {\cleardoublepage}
 %- acknowledgements
 \newenvironment{acknowledgements}
-{\prechapter{\UW@label@thanks}}
+{\prechapter{\uw@label@thanks}}
 {\cleardoublepage}
 %- dedication
 \newenvironment{dedication}
-{\prechapter{\UW@label@dedication}\begin{center}\bigskip\itshape}
+{\prechapter{\uw@label@dedication}\begin{center}\bigskip\itshape}
 {\end{center}\cleardoublepage}
 %---------------------------------------------------------------------------%
 %->> Configure table of contents
