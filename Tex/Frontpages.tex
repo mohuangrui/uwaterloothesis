@@ -1,14 +1,42 @@
-%%
-%% >>> Title Page
-%%
+%---------------------------------------------------------------------------%
+%->> Titlepage information
+%---------------------------------------------------------------------------%
+%-
+%-> Title info
+%-
 \title[\LaTeX{} Thesis Template of UW]{\LaTeX{} Thesis Template\\ of\\ The University of Waterloo}% \title[short title for headers]{Long title of thesis}
 \author{Huangrui Mo}
 \degree{Doctor of Philosophy}
 \discipline{Mechanical Engineering}
 \maketitle
-%%
-%% >>> author's declaration
-%%
+%-
+%-> Examining Committee Membership
+%-
+\intotoc{Examining Committee Membership}% add a corresponding item to the contents table and bookmark
+\begin{committee}
+    \noindent
+    The following served on the Examining Committee for this thesis. The decision of the Examining Committee is by majority vote.
+
+    \begin{center}
+        %\footnotesize% fontsize
+        \setlength{\tabcolsep}{10pt}% column separation
+        \renewcommand{\arraystretch}{3}% row space 
+        \begin{tabular}{lc}
+            External Examiner & \parbox[t]{10cm}{Dr. Luc Bauwens\\Professor, Mechanical and Manufacturing Engineering\\University of 
+Calgary}\\
+            Supervisors & \parbox[t]{10cm}{Dr. Fue-Sang Lien\\Professor, Mechanical Engineering\\University of Waterloo}\\
+             & \parbox[t]{10cm}{Dr. Fan Zhang\\Senior Scientist, Advanced Energetics Group\\Defence Research and Development Canada}\\
+             & \parbox[t]{10cm}{Dr. Duane Cronin\\Professor, Mechanical Engineering\\University of Waterloo}\\
+            Internal Member & \parbox[t]{10cm}{Dr. Cecile Devaud\\Professor, Mechanical Engineering\\University of Waterloo}\\
+             & \parbox[t]{10cm}{Dr. Jean-Pierre Hickey\\Assistant Professor, Mechanical Engineering\\University of Waterloo}\\
+            Internal-External Member & \parbox[t]{10cm}{Dr. Lilia Krivodonova\\Associate Professor, Applied Mathematics\\University of Waterloo}\\
+        \end{tabular}
+    \end{center}
+\end{committee}
+%-
+%-> Author's declaration
+%-
+\intotoc{Author's Declaration}% add a corresponding item to the contents table and bookmark
 \begin{declaration}
     \noindent
     I hereby declare that I am the sole author of this thesis. This is a true copy of the thesis, including any required final revisions, as accepted by my examiners.
@@ -18,22 +46,31 @@
     \noindent
     I understand that my thesis may be made electronically available to the public.
 \end{declaration}
-%%
-%% >>> abstract
-%%
+%-
+%-> Statement of Contributions
+%-
+%\intotoc{Statement of Contributions}% add a corresponding item to the contents table and bookmark
+%\begin{contribute}
+%\end{contribute}
+%-
+%-> Abstract
+%-
 \intotoc{Abstract}% add a corresponding item to the contents table and bookmark
 \begin{abstract}
-    This is a short brochure on how to write your thesis by using this \LaTeX{} template. It's easy, efficient and straightforward. What you need to do, no matter you are familiar with \LaTeX{} or not, is to have a try. 
+    This is a short brochure on how to write your thesis by using this \LaTeX{} template. It's easy, efficient and straightforward. What you need to do, no matter you are familiar with \LaTeX{} or not, is to have a try.
 \end{abstract}
-%%
-%%% >>> acknowledgements
-%%
+%-
+%-> Acknowledgements
+%-
+\intotoc{Acknowledgements}% add a corresponding item to the contents table and bookmark
 \begin{acknowledgements}
-    This work would not be done without the numerous excellent online resources. Many thanks to those who ever contributed or will contribute their knowledge to the open source community.
+Financial support of this work was provided by Natural Sciences and Engineering Research Council of Canada (NSERC) and Defence Research and Development Canada (DRDC). This work was made possible by the facilities of the Shared Hierarchical Academic Research Computing Network (SHARCNET: www.sharcnet.ca) and Compute/Calcul Canada.
 \end{acknowledgements}
-%%
-%% >>> dedication (if necessary)
-%%
-\begin{dedication}
-    Dedication (included if necessary)
-\end{dedication}
+%-
+%-> Dedication
+%-
+%\intotoc{Dedication}% add a corresponding item to the contents table and bookmark
+%\begin{dedication}
+%    Dedication (included if necessary)
+%\end{dedication}
+%---------------------------------------------------------------------------%
