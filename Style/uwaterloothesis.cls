@@ -209,6 +209,10 @@
 \newenvironment{contribute}
 {\prechapter{\uw@label@contribute}}
 {\cleardoublepage}
+%- permission
+\newenvironment{permission}
+{\prechapter{\uw@label@permission}}
+{\cleardoublepage}
 %- abstract
 \newenvironment{abstract}
 {\prechapter{\uw@label@abstract}}
