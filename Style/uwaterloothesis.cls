@@ -19,17 +19,15 @@
 %-
 %-> Layout
 %-
-\newif\ifuw@singlesided \uw@singlesidedfalse
 \DeclareOption{singlesided}{% enable single-sided printing
-    \uw@singlesidedtrue%
+    \PassOptionsToClass{oneside}{book}%
 }
-\newif\ifuw@doublesided \uw@doublesidedfalse
 \DeclareOption{doublesided}{% enable double-sided printing
-    \uw@doublesidedtrue%
+    \PassOptionsToClass{openright,twoside}{book}%
 }
 \newif\ifuw@printcopy \uw@printcopyfalse
 \DeclareOption{printcopy}{% enable print copy layout
-    \uw@doublesidedtrue% auto enable double-sided style
+    \PassOptionsToClass{openright,twoside}{book}%
     \uw@printcopytrue%
 }
 %-
@@ -52,11 +50,7 @@
 %---------------------------------------------------------------------------%
 %->> Load class information
 %---------------------------------------------------------------------------%
-\ifuw@doublesided% if double-sided printing enabled
-    \LoadClass[letterpaper,12pt,openright,twoside]{book}
-\else% if double-sided printing isn't enabled
-    \LoadClass[letterpaper,12pt,oneside]{book}
-\fi
+\LoadClass[letterpaper,12pt]{book}
 %---------------------------------------------------------------------------%
 %->> Required packages
 %---------------------------------------------------------------------------%
