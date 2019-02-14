@@ -157,7 +157,7 @@
 %-
 %-> Math packages
 %-
-\RequirePackage{amsmath,amsthm,amssymb}% math packages
+\RequirePackage{amsmath,amsthm,amssymb}% math structures, theorems, and extended symbols
 \theoremstyle{plain}% for theorems, lemmas, propositions, etc
 \providecommand{\theoremname}{Theorem}%
 \newtheorem{theorem}{\theoremname}[chapter]
@@ -183,7 +183,7 @@
 \newtheorem*{remark}{\remarkname}
 
 \ifartx@math% extra math packages
-    \RequirePackage{mathtools}%
+    \RequirePackage{mathtools}% extension to amsmath
 \fi
 %-
 %-> Language settings
@@ -191,14 +191,16 @@
 \ifartx@pdftex% <pdflatex> call font packages
     \RequirePackage[utf8]{inputenc}% set input encoding, document must use utf-8 encoding
     \RequirePackage[T1]{fontenc}% set font encoding to enable modern font encoding
-    %- Call font package options:
-    %- Text + Math: Times Roman
-    \RequirePackage{newtxtext}%
-    \RequirePackage[cmintegrals]{newtxmath}% load after math packages
-    %- Text + Math: Palatino
-    %\RequirePackage{palatino}%
+    %- Text font: English <default: computer modern|others: font packages>
+    \RequirePackage{newtxtext}% main font, <times font: newtxtext|others: palatino>
+    %- Math font: <default: computer modern|others: font packages>
+    \RequirePackage[cmintegrals]{newtxmath}% times font, load after amsmath and newtxtext packages
+    \DeclareSymbolFont{operators}{OT1}{ntxtlf}{m}{n}% fix numbers by setting operator font to newtx-family
+    \SetSymbolFont{operators}{bold}{OT1}{ntxtlf}{b}{n}% fix numbers by setting operator font to newtx-family
+    \RequirePackage{mathrsfs}% enable \mathscr for script alphabet
+    \RequirePackage[cal=cm]{mathalfa}% map styles for calligraphic \mathcal and script \mathscr alphabet
 \else% <xelatex> or <lualatex> call system fonts
-    %\RequirePackage[cmintegrals]{newtxmath}% math symbol font, load after math but before fontspec packages
+    %- Text font: English <default: computer modern|fontspec: system fonts|others: font packages>
     \RequirePackage{fontspec}% support calling system fonts
     %- Font properties: <family> + <weight> + <shape> + <size>
     %- Specify the three default TeX font families: <main>, <sans>, <mono>
@@ -218,12 +220,19 @@
     %- examples: Rockwell, Andale Mono, Courier
     %\setmonofont{Rockwell}% font switches: {\ttfamily, ...}, \texttt{...}
     %- Specify user-defined font families and font switches
+    %- without NFSSFamily option, a font family is defined only if adding a new font name
     %\newfontfamily\<font-switch>{<font>}[<font features>]%
     %\newcommand{\text<font-switch>}[1]{{\<font-switch> #1}}%
-    % without NFSSFamily option, a font family is defined only when the added font name
-    % is a new one. mathrm and mathsf can be set by \setmathrm and \setmathsf
-    %\RequirePackage{unicode-math}% another math symbol font configuration
+    \RequirePackage{newtxtext}% main font
+    %- Math font: <default: computer modern|others: font packages <newtxmath|unicode-math>>
+    \RequirePackage[cmintegrals]{newtxmath}% times font, load after amsmath and newtxtext packages
+    \DeclareSymbolFont{operators}{OT1}{ntxtlf}{m}{n}% fix numbers by setting operator font to newtx-family
+    \SetSymbolFont{operators}{bold}{OT1}{ntxtlf}{b}{n}% fix numbers by setting operator font to newtx-family
+    \RequirePackage{mathrsfs}% enable \mathscr for script alphabet
+    \RequirePackage[cal=cm]{mathalfa}% map styles for calligraphic \mathcal and script \mathscr alphabet
+    %\RequirePackage{unicode-math}% another math font configuration
     %\setmathfont{XITS Math}% a complete symbol set for STIX math fonts
+    %- mathrm and mathsf can be set by \setmathrm and \setmathsf
 \fi
 %-
 %-> Bibliography processor and package

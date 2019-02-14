@@ -222,11 +222,22 @@
 %---------------------------------------------------------------------------%
 %->> Configure table of contents
 %---------------------------------------------------------------------------%
-%%- define spacing and length
-%\def\@dotsep{1.5mu}% spacing for dots
-%\def\@pnumwidth{2em}% spacing between titles and page numbers
-%\def\@tocrmarg{2em}% right margin indentation
-%\def\@chaptervspace{1ex}% spacing between chapter titles
+%- the table of contents is specified by defining \l@chapter, \l@section, ...
+%- most commands are then defined with the \@dottedtocline:
+%- \@dottedtocline{⟨level⟩}{⟨indent⟩}{⟨numwidth⟩}{⟨title⟩}{⟨page⟩}
+%- ⟨level⟩    an entry is produced only if ⟨level⟩ <= value of the tocdepth counter
+%-            note, \chapter is level 0, \section is level 1, etc
+%- ⟨indent⟩   indentation from the outer left margin of the start of the contents line
+%- ⟨numwidth⟩ width of a box in which the section number is to go
+%- <title>    title
+%- <page>     page number
+
+%%- parameters for spacing and length in toc
+%\def\@dotsep{1.5mu}% separation between dots in mu units
+%\def\@pnumwidth{2em}% width of a box in which the page number is put
+%\def\@tocrmarg{2em}% right margin for multiple line entries, \@tocrmarg ≥ \@pnumwidth
+%\def\@chaptervspace{1ex}% vertical space between chapter titles
+%
 %%- redefine dottedtocline from classes.dtx and latex.ltx
 %\renewcommand*{\@dottedtocline}[5]{% [<level>,<indent>,<numwidth>,<title>,<page>]
 %    \ifnum #1>\c@tocdepth \else
@@ -282,6 +293,14 @@
 %        \endgroup
 %    \fi
 %}
+%%- redefine indentation for others
+%\renewcommand*\l@section{\@dottedtocline{1}{1em}{2em}}
+%\renewcommand*\l@subsection{\@dottedtocline{2}{2em}{3em}}
+%\renewcommand*\l@subsubsection{\@dottedtocline{3}{3em}{4em}}
+%\renewcommand*\l@paragraph{\@dottedtocline{4}{4em}{5em}}
+%\renewcommand*\l@subparagraph{\@dottedtocline{5}{5em}{6em}}
+%\renewcommand*\l@figure{\@dottedtocline{1}{1em}{2em}}
+%\renewcommand*\l@table{\@dottedtocline{1}{1em}{2em}}
 %---------------------------------------------------------------------------%
 \endinput
 
