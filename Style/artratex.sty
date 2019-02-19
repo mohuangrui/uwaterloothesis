@@ -206,8 +206,6 @@
     \RequirePackage{newtxtext}% main font, <times font: newtxtext|others: palatino>
     %- Math font: <default: computer modern|others: font packages>
     \RequirePackage[cmintegrals]{newtxmath}% times font, load after amsmath and newtxtext packages
-    \DeclareSymbolFont{operators}{OT1}{ntxtlf}{m}{n}% fix numbers by setting operator font to newtx-family
-    \SetSymbolFont{operators}{bold}{OT1}{ntxtlf}{b}{n}% fix numbers by setting operator font to newtx-family
     \RequirePackage{mathrsfs}% enable \mathscr for script alphabet
     \RequirePackage[cal=cm]{mathalfa}% map styles for calligraphic \mathcal and script \mathscr alphabet
 \else% <xelatex> or <lualatex> call system fonts
@@ -237,8 +235,6 @@
     \RequirePackage{newtxtext}% main font
     %- Math font: <default: computer modern|others: font packages <newtxmath|unicode-math>>
     \RequirePackage[cmintegrals]{newtxmath}% times font, load after amsmath and newtxtext packages
-    \DeclareSymbolFont{operators}{OT1}{ntxtlf}{m}{n}% fix numbers by setting operator font to newtx-family
-    \SetSymbolFont{operators}{bold}{OT1}{ntxtlf}{b}{n}% fix numbers by setting operator font to newtx-family
     \RequirePackage{mathrsfs}% enable \mathscr for script alphabet
     \RequirePackage[cal=cm]{mathalfa}% map styles for calligraphic \mathcal and script \mathscr alphabet
     %\RequirePackage{unicode-math}% another math font configuration
