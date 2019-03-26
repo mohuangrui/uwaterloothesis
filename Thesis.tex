@@ -53,12 +53,12 @@
 \input{Tex/Frontpages}% title page, abstract, dedication
 {% content list region
 \linespread{1.1}% local line space
-\intotoc{\contentsname}% add link to contents table and bookmark
-\tableofcontents% contents catalog
-\intotoc{\listfigurename}% add link to contents table and bookmark
-\listoffigures% figures catalog
-\intotoc{\listtablename}% add link to contents table and bookmark
-\listoftables% tables catalog
+\intotoc*{\cleardoublepage}{\contentsname}% add link to bookmark
+\tableofcontents% content catalog
+\intotoc*{\cleardoublepage}{\listfigurename}% add link to bookmark
+\listoffigures% figure catalog
+\intotoc*{\cleardoublepage}{\listtablename}% add link to bookmark
+\listoftables% table catalog
 }
 \input{Tex/Prematter}% list of symbols, preface content
 %-
@@ -76,7 +76,7 @@
 %-> Backmatter: bibliography, glossary, index
 %-
 \backmatter% initialize the environment
-\intotoc{\bibname}% add link to contents table and bookmark
+\intotoc*{\cleardoublepage}{\bibname}% add link to toc
 \bibliography{Biblio/ref}% bibliography
 \end{document}
 %---------------------------------------------------------------------------%
