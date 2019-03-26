@@ -65,6 +65,8 @@
 %---------------------------------------------------------------------------%
 %->> Page layout
 %---------------------------------------------------------------------------%
+%- use \topmargin insead of \voffset to shift the complete text vertically
+%- use \<odd|even>sidemargin insead of \hoffset to shift text horizontally
 %- part one -- horizontal widths
 %- left side width + textwidth + right side width = paperwidth
 %- binding side width + textwidth + nonbinding side width = paperwidth
@@ -86,8 +88,8 @@
 %- top height + textheight + bottom height = paperheight
 %- top height = 1.0in (fixed) + voffset + topmargin + headheight + headsep 
 \setlength{\textheight}{220mm}% set required text height first
-\setlength{\voffset}{-15mm}% set vertical offset
-\setlength{\topmargin}{20pt}% vertical margin above header
+\setlength{\voffset}{0mm}% set vertical offset
+\setlength{\topmargin}{-8mm}% vertical margin above header
 \setlength{\headheight}{12pt}% header height
 \setlength{\headsep}{25pt}% vertical margin between header and body text
 \setlength{\footskip}{30pt}% vertical margin between footer and body text
