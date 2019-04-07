@@ -16,6 +16,7 @@
 %---------------------------------------------------------------------------%
 %->> Declare options
 %---------------------------------------------------------------------------%
+\RequirePackage{ifthen}%
 %-
 %-> LaTeX engine <pdflatex>, <lualatex>, <xelatex>
 %-
@@ -102,6 +103,10 @@
 \newif\ifartx@color \artx@colorfalse
 \DeclareOption{color}{%
     \artx@colortrue
+}
+\newif\ifartx@blink \artx@blinkfalse
+\DeclareOption{blink}{%
+    \artx@blinktrue
 }
 %-
 %-> Page background
@@ -344,29 +349,37 @@
     \def\ALG@name{\algname}% rename label
 \fi
 %-
-%-> Links support
+%-> Link support
 %-
-\RequirePackage{hyperref}%
-\hypersetup{% set hyperlinks
-    %bookmarks=true,% show bookmarks bar
-    pdfencoding=auto,% allows non-Latin based languages in bookmarks
-    %pdftitle={},% title
-    %pdfauthor={},% author
-    %pdfsubject={},% subject
-    %pdftoolbar=true,% show toolbar
-    %pdfmenubar=true,% show menu
-    pdffitwindow=false,% window fit to page when opened
-    pdfstartview={FitH},% fits the width of the page to the window
-    %pdfnewwindow=true,% links in new window
-    %backref=true,% do bibliographical back references
-    %pagebackref=true,% backreference by page number
-    colorlinks=true,% false: boxed links; true: colored links
-    linkcolor=black,% color of internal links
-    citecolor=blue,% color of links to bibliography
-    %filecolor=magenta,% color of file links
-    urlcolor=black,% color of external links
-    bookmarksnumbered=true,% put section numbers in bookmarks
-    %hidelinks% remove link color and border
+\AtEndOfPackage{%
+    \RequirePackage{hyperref}% load at last
+}
+\AtBeginDocument{%
+    \hypersetup{% set hyperlinks
+        pdfencoding=auto,% allows non-Latin based languages in bookmarks
+        %bookmarks=true,% show bookmarks bar
+        bookmarksnumbered=true,% put section numbers in bookmarks
+        %pdftitle={},% title
+        %pdfauthor={},% author
+        %pdfsubject={},% subject
+        %pdftoolbar=true,% show toolbar
+        %pdfmenubar=true,% show menu
+        pdffitwindow=false,% window fit to page when opened
+        pdfstartview={FitH},% fits the width of the page to the window
+        %pdfnewwindow=true,% links in new window
+        %backref=true,% do bibliographical back references
+        %pagebackref=true,% backreference by page number
+        colorlinks=true,% false: boxed links; true: colored links
+        linkcolor=black,% color of internal links
+        citecolor=blue,% color of links to bibliography
+        filecolor=blue,% color of file links
+        urlcolor=blue,% color of external links
+    }
+    \ifartx@blink% set link color to black
+        \hypersetup{% set hyperlinks
+            hidelinks,% remove link color and border
+        }
+    \fi
 }
 %---------------------------------------------------------------------------%
 %->> Configuration command
@@ -478,28 +491,22 @@
     %- Define different kinds of header and footer for different parts
     \fancypagestyle{frontmatterstyle}{% style for frontmatter
         \fancyhf{}% clear fields
-        \fancyhead[CE]{\footnotesize \@title}% structure elements
-        \fancyhead[CO]{\footnotesize \leftmark}% structure elements
-        \fancyfoot[CE]{\footnotesize \thepage}% page number
-        \fancyfoot[CO]{\footnotesize \thepage}% page number
+        \fancyhead[C]{\footnotesize \ifthenelse{\isodd{\value{page}}}{\leftmark}{\@title}}% structure elements
+        \fancyfoot[C]{\footnotesize \thepage}% page number
         \renewcommand{\headrulewidth}{0.8pt}% header rule
         \renewcommand{\footrulewidth}{0pt}% footer rule
     }
     \fancypagestyle{mainmatterstyle}{% style for mainmatter
         \fancyhf{}% clear fields
-        \fancyhead[CE]{\footnotesize \@title}% structure elements
-        \fancyhead[CO]{\footnotesize \CTEXthechapter\ \leftmark}% structure elements
-        \fancyfoot[CE]{\footnotesize \thepage}% page number
-        \fancyfoot[CO]{\footnotesize \thepage}% page number
+        \fancyhead[C]{\footnotesize \ifthenelse{\isodd{\value{page}}}{\CTEXthechapter\ \leftmark}{\@title}}% structure elements
+        \fancyfoot[C]{\footnotesize \thepage}% page number
         \renewcommand{\headrulewidth}{0.8pt}% header rule
         \renewcommand{\footrulewidth}{0pt}% footer rule
     }
     \fancypagestyle{backmatterstyle}{% header and footer style for backmatter
         \fancyhf{}% clear fields
-        \fancyhead[CE]{\footnotesize \@title}% structure elements
-        \fancyhead[CO]{\footnotesize \leftmark}% structure elements
-        \fancyfoot[CE]{\footnotesize \thepage}% page number
-        \fancyfoot[CO]{\footnotesize \thepage}% page number
+        \fancyhead[C]{\footnotesize \ifthenelse{\isodd{\value{page}}}{\leftmark}{\@title}}% structure elements
+        \fancyfoot[C]{\footnotesize \thepage}% page number
         \renewcommand{\headrulewidth}{0.8pt}% header rule
         \renewcommand{\footrulewidth}{0pt}% footer rule
     }
@@ -531,8 +538,7 @@
     %- the current style, comment all the lines in plain style definition.
     \fancypagestyle{plain}{%
         \fancyhf{}% clear fields
-        \fancyfoot[CE]{\footnotesize \thepage}% page number
-        \fancyfoot[CO]{\footnotesize \thepage}% page number
+        \fancyfoot[C]{\footnotesize \thepage}% page number
         \renewcommand{\headrulewidth}{0pt}% header rule
         \renewcommand{\footrulewidth}{0pt}% footer rule
     }
@@ -543,7 +549,7 @@
 \ifartx@lscape%
 \fancypagestyle{lscape}{% landscape layout style
     \fancyhf{}% clear fields
-    \fancyfoot[CE,CO]{%
+    \fancyfoot[C]{%
     %- textpos: \begin{textblock}{<blockwidth>}[0.5,0.5](<hpos>,<vpos>) text... \end{textblock}
     %- origin of the absolute coordinate is the top-left corner of the page
     %- [0.5,0.5] means reference point of the block is the middle

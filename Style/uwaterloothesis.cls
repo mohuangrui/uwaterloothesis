@@ -19,10 +19,10 @@
 %-
 %-> Layout
 %-
-\DeclareOption{singlesided}{% enable single-sided printing
+\DeclareOption{singlesided}{% enable oneside printing
     \PassOptionsToClass{oneside}{book}%
 }
-\DeclareOption{doublesided}{% enable double-sided printing
+\DeclareOption{doublesided}{% enable twoside printing
     \PassOptionsToClass{openright,twoside}{book}%
 }
 \newif\ifuw@printcopy \uw@printcopyfalse
@@ -188,6 +188,11 @@
             \end{footnotesize}
             \cleardoublepage
         \fi
+    \fi
+    \ifuw@printcopy% set link color to black
+        \hypersetup{% set hyperlinks
+            hidelinks,% remove link color and border
+        }
     \fi
 }
 %---------------------------------------------------------------------------%
