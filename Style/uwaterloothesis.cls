@@ -12,23 +12,23 @@
 %->> Identification
 %---------------------------------------------------------------------------%
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesClass{uwaterloothesis}[2014/10/01 v0.1 LaTeX document class]%
+\ProvidesClass{uwaterloothesis}[2014/10/01 v1.0 LaTeX document class]%
 %---------------------------------------------------------------------------%
 %->> Declare options
 %---------------------------------------------------------------------------%
 %-
 %-> Layout
 %-
-\DeclareOption{singlesided}{% enable oneside printing
+\DeclareOption{oneside}{%
     \PassOptionsToClass{oneside}{book}%
 }
-\DeclareOption{doublesided}{% enable twoside printing
+\DeclareOption{twoside}{%
     \PassOptionsToClass{openright,twoside}{book}%
 }
-\newif\ifuw@printcopy \uw@printcopyfalse
-\DeclareOption{printcopy}{% enable print copy layout
+\newif\ifuw@print \uw@printfalse
+\DeclareOption{print}{%
     \PassOptionsToClass{openright,twoside}{book}%
-    \uw@printcopytrue%
+    \uw@printtrue%
 }
 %-
 %-> Draft version info
@@ -75,7 +75,7 @@
 %- assuming US letter paper (8.5in. x 11in.)
 \setlength{\textwidth}{6in}% set required text width first
 \setlength{\hoffset}{0mm}% set horizontal offset
-\ifuw@printcopy% if print copy layout enabled
+\ifuw@print% if print layout enabled
     \setlength{\oddsidemargin}{0.5in}% binding side margin
     \setlength{\evensidemargin}{0in}% ensure uniform binding side width for printing
 \else
@@ -127,7 +127,6 @@
     %\def\uw@value@titlemark{\MakeUppercase{#1}}}%
     \def\uw@value@titlemark{#1}%
 }
-\renewcommand{\@title}{\uw@value@titlemark}
 \renewcommand{\author}[1]{\def\uw@value@author{#1}}
 \newcommand{\degree}[1]{\def\uw@value@degree{#1}}
 \newcommand{\discipline}[1]{\def\uw@value@discipline{#1}}
@@ -189,7 +188,7 @@
             \cleardoublepage
         \fi
     \fi
-    \ifuw@printcopy% set link color to black
+    \ifuw@print%
         \hypersetup{% set hyperlinks
             hidelinks,% remove link color and border
         }
@@ -226,6 +225,11 @@
 \newenvironment{dedication}
 {\prechapter{\uw@label@dedication}\begin{center}\bigskip\itshape}
 {\end{center}\cleardoublepage}
+%---------------------------------------------------------------------------%
+%->> Structure elements
+%---------------------------------------------------------------------------%
+\def\@title{\uw@value@titlemark}
+\def\@author{\uw@value@author}
 %---------------------------------------------------------------------------%
 %->> Configure table of contents
 %---------------------------------------------------------------------------%

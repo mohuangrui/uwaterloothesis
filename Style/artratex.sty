@@ -12,11 +12,12 @@
 %->> Identification
 %---------------------------------------------------------------------------%
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesPackage{artratex}[2014/10/01 v0.1 LaTeX macros package]%
+\ProvidesPackage{artratex}[2014/10/01 v1.0 LaTeX macros package]%
 %---------------------------------------------------------------------------%
 %->> Declare options
 %---------------------------------------------------------------------------%
-\RequirePackage{ifthen}%
+\RequirePackage{ifthen}% support conditionals
+\RequirePackage{etoolbox}% a toolbox of programming facilities
 %-
 %-> LaTeX engine <pdflatex>, <lualatex>, <xelatex>
 %-
@@ -93,9 +94,9 @@
 %-
 %-> Header and footer
 %-
-\newif\ifartx@myhdr \artx@myhdrfalse
-\DeclareOption{myhdr}{%
-    \artx@myhdrtrue
+\newif\ifartx@xhf \artx@xhftrue
+\DeclareOption{xhf}{%
+    \artx@xhffalse
 }
 %-
 %-> Color support
@@ -104,9 +105,9 @@
 \DeclareOption{color}{%
     \artx@colortrue
 }
-\newif\ifartx@blink \artx@blinkfalse
-\DeclareOption{blink}{%
-    \artx@blinktrue
+\newif\ifartx@xlink \artx@xlinkfalse
+\DeclareOption{xlink}{%
+    \artx@xlinktrue
 }
 %-
 %-> Page background
@@ -157,8 +158,11 @@
 %-
 \ProcessOptions\relax%
 %---------------------------------------------------------------------------%
-%->> Detect class and counter
+%->> Package macros
 %---------------------------------------------------------------------------%
+%-
+%-> Detect class and counter
+%-
 \newcommand*{\artxifcnt}[1]{% check if counter exists
     \ifcsname c@#1\endcsname%
         \expandafter\@firstoftwo%
@@ -167,6 +171,57 @@
     \fi
 }
 \artxifcnt{chapter}{\def\artxmaincnt{chapter}}{\def\artxmaincnt{section}}%
+%-
+%-> Nomenclature item
+%-
+\providecommand{\nomenclatureitem}[3][ ]{%
+    \noindent\makebox[0.15\textwidth][l]{#2}{{#3}\hfill{#1}}\par
+}
+%-
+%-> Macro for adding link to toc and bookmark
+%-
+\long\def\artxaux#1{}% auxiliary command
+\newcommand{\intotocnostar}[3]{% [<\chapter|...>,<*>,<title>]
+    #1#2{% excute command
+        \phantomsection% create bookmark link
+        \addcontentsline{toc}{\expandafter\artxaux\string#1}{#3}% add content #3 to toc as #1
+        #3%
+    }
+    \markboth{\MakeUppercase{#3}}{}% set header mark
+}
+\newcommand{\intotocstar}[3][\artxmaincnt]{% [<chapter|...>,<extra commands>,<title>]
+    #2% excute command
+    \phantomsection% create bookmark link
+    \addcontentsline{toc}{#1}{#3}% add content #3 to toc as #1
+    \markboth{\MakeUppercase{#3}}{}% set header mark
+}
+\newcommand{\intotoc}{\@ifstar{\intotocstar}{\intotocnostar}}% swap starred and non-starred versions
+\newcommand{\intobmknostar}[4][0]{% [<level>,<\chapter|...>,<*>,<title>]
+    #2#3{% excute command
+        \phantomsection% create bookmark link
+        \Hy@writebookmark% write bookmark
+        {}%
+        {#4}%
+        {\@currentHref}%
+        {#1}%
+        {toc}%
+        #4%
+    }%
+    \markboth{\MakeUppercase{#4}}{}% set header mark
+}
+\newcommand{\intobmkstar}[3][0]{% [<level>,<extra commands>,<title>]
+    #2% excute command
+    \phantomsection% create bookmark link
+    \Hy@writebookmark% write bookmark
+    {}%
+    {#3}%
+    {\@currentHref}%
+    {#1}%
+    {toc}%
+    \markboth{\MakeUppercase{#3}}{}% set header mark
+}
+\newcommand{\intobmk}{\@ifstar{\intobmkstar}{\intobmknostar}}% swap starred and non-starred versions
+%\newcommand{\rmlbk}[1]{\begingroup\def\\{\relax\ifhmode\unskip\fi\space\ignorespaces}#1\endgroup}% remove line breaks 
 %---------------------------------------------------------------------------%
 %->> Required packages
 %---------------------------------------------------------------------------%
@@ -305,7 +360,7 @@
     \RequirePackage{pdflscape}% landscape environment
     \RequirePackage[absolute]{textpos}% rotated page number
 \fi
-\ifartx@myhdr% header and footer style
+\ifartx@xhf% header and footer style
     \RequirePackage{fancyhdr}% fancy headers and footers
 \fi
 %\RequirePackage{microtype}% improves general appearance of the text
@@ -351,17 +406,15 @@
 %-
 %-> Link support
 %-
-\AtEndOfPackage{%
+\AtEndPreamble{%
     \RequirePackage{hyperref}% load at last
-}
-\AtBeginDocument{%
     \hypersetup{% set hyperlinks
         pdfencoding=auto,% allows non-Latin based languages in bookmarks
         %bookmarks=true,% show bookmarks bar
         bookmarksnumbered=true,% put section numbers in bookmarks
-        %pdftitle={},% title
-        %pdfauthor={},% author
-        %pdfsubject={},% subject
+        pdftitle={\@title},% title
+        pdfauthor={\@author},% author
+        pdfsubject={\@title},% subject
         %pdftoolbar=true,% show toolbar
         %pdfmenubar=true,% show menu
         pdffitwindow=false,% window fit to page when opened
@@ -375,7 +428,7 @@
         filecolor=blue,% color of file links
         urlcolor=blue,% color of external links
     }
-    \ifartx@blink% set link color to black
+    \ifartx@xlink% set link color to black
         \hypersetup{% set hyperlinks
             hidelinks,% remove link color and border
         }
@@ -422,71 +475,21 @@
 \fi
 \renewcommand*{\bibfont}{\small}% set font size for bibliography
 %-
-%-> Nomenclature item
-%-
-\providecommand{\nomenclatureitem}[3][ ]{%
-    \noindent\makebox[0.15\textwidth][l]{#2}{{#3}\hfill{#1}}\par
-}
-%-
-%-> Macro for adding link to toc and bookmark
-%-
-\long\def\artxaux#1{}% auxiliary command
-\newcommand{\intotocnostar}[3]{% [<\chapter|...>,<*>,<title>]
-    #1#2{% excute command
-        \phantomsection% create bookmark link
-        \addcontentsline{toc}{\expandafter\artxaux\string#1}{#3}% add content #3 to toc as #1
-        #3%
-    }
-    \markboth{\MakeUppercase{#3}}{}% set header mark
-}
-\newcommand{\intotocstar}[3][\artxmaincnt]{% [<chapter|...>,<extra commands>,<title>]
-    #2% excute command
-    \phantomsection% create bookmark link
-    \addcontentsline{toc}{#1}{#3}% add content #3 to toc as #1
-    \markboth{\MakeUppercase{#3}}{}% set header mark
-}
-\newcommand{\intotoc}{\@ifstar{\intotocstar}{\intotocnostar}}% swap starred and non-starred versions
-\newcommand{\intobmknostar}[4][0]{% [<level>,<\chapter|...>,<*>,<title>]
-    #2#3{% excute command
-        \phantomsection% create bookmark link
-        \Hy@writebookmark% write bookmark
-        {}%
-        {#4}%
-        {\@currentHref}%
-        {#1}%
-        {toc}%
-        #4%
-    }%
-    \markboth{\MakeUppercase{#4}}{}% set header mark
-}
-\newcommand{\intobmkstar}[3][0]{% [<level>,<extra commands>,<title>]
-    #2% excute command
-    \phantomsection% create bookmark link
-    \Hy@writebookmark% write bookmark
-    {}%
-    {#3}%
-    {\@currentHref}%
-    {#1}%
-    {toc}%
-    \markboth{\MakeUppercase{#3}}{}% set header mark
-}
-\newcommand{\intobmk}{\@ifstar{\intobmkstar}{\intobmknostar}}% swap starred and non-starred versions
-%-
 %-> Page header and footer Style
 %-
 %- Page styles in Latex refers to headers and footers of a document.
 %- These headers/footers typically contain document titles, chapter
 %- or section numbers/names, and page numbers.
 %- Configure fancy style
-\ifartx@myhdr% user defined header and footer style
+\ifartx@xhf% user defined header and footer style
     \pagestyle{fancy}%
     \providecommand{\chaptermark}{}% compatibility for non-book classes
     \providecommand{\thechapter}{}% compatibility for non-book classes
     \providecommand{\CTEXthechapter}{\thechapter.}% compatibility for non ctex classes
-    %- reset style of chapter and section mark to actual name
+    %- Reset style of chapter and section mark to actual name
     \renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{#1}}{}}%
     \renewcommand{\sectionmark}[1]{\markright{\MakeUppercase{#1}}{}}%
-    %- deactivate uppercase effect
+    %- Deactivate uppercase effect
     \renewcommand{\MakeUppercase}[1]{#1}%
     %- Define different kinds of header and footer for different parts
     \fancypagestyle{frontmatterstyle}{% style for frontmatter
@@ -512,23 +515,23 @@
     }
     %- Redefine \frontmatter to include the change
     \providecommand{\frontmatter}{}% compatibility for non-book classes
-    \let\myfrontmatter\frontmatter%
+    \let\artxfrontmatter\frontmatter%
     \renewcommand{\frontmatter}{%
-        \myfrontmatter%
+        \artxfrontmatter%
         \pagestyle{frontmatterstyle}%
     }
     %- Redefine \mainmatter to include the change
     \providecommand{\mainmatter}{}% compatibility for non-book classes
-    \let\mymainmatter\mainmatter%
+    \let\artxmainmatter\mainmatter%
     \renewcommand{\mainmatter}{%
-        \mymainmatter%
+        \artxmainmatter%
         \pagestyle{mainmatterstyle}%
     }
     %- Redefine \backmatter to include the change
     \providecommand{\backmatter}{}% compatibility for non-book classes
-    \let\mybackmatter\backmatter%
+    \let\artxbackmatter\backmatter%
     \renewcommand{\backmatter}{%
-        \mybackmatter%
+        \artxbackmatter%
         \pagestyle{backmatterstyle}%
     }
     %- Some Latex commands, like \chapter, use the \thispagestyle command
@@ -562,10 +565,13 @@
     \renewcommand{\footrulewidth}{0pt}% footer rule
 }
 \fi
+%-
+%-> Configure list environment
+%-
 \ifartx@list% enable enhanced list
-    \definecolor{mygreen}{rgb}{0,0.6,0}
-    \definecolor{mygray}{rgb}{0.5,0.5,0.5}
-    \definecolor{mymauve}{rgb}{0.58,0,0.82}
+    \definecolor{artxgreen}{rgb}{0,0.6,0}
+    \definecolor{artxgray}{rgb}{0.5,0.5,0.5}
+    \definecolor{artxmauve}{rgb}{0.58,0,0.82}
     \lstset{%
         numberbychapter=false,% numbered sequentially or by chapter
         backgroundcolor=\color{white},% background color;
@@ -573,7 +579,7 @@
         breakatwhitespace=false,% sets if automatic breaks should only happen at whitespace
         breaklines=true,% sets automatic line breaking
         captionpos=b,% caption-position to bottom
-        commentstyle=\color{mygreen},% comment style
+        commentstyle=\color{artxgreen},% comment style
         %deletekeywords={...},% delete keywords from the given language
         frame=single,% adds a frame around the code
         keepspaces=true,% keeps spaces in text for keeping indentation of code
@@ -581,13 +587,13 @@
         %otherkeywords={*,...},% add more keywords to the set
         numbers=left,% where to put the line-numbers; possible values are (none, left, right)
         numbersep=5pt,% how far the line-numbers are from the code
-        numberstyle=\tiny\color{mygray},% the style that is used for the line-numbers
+        numberstyle=\tiny\color{artxgray},% the style that is used for the line-numbers
         rulecolor=\color{black},% if not set, the frame-color may be changed on line-breaks
         showspaces=false,% show spaces everywhere adding particular underscores;
         showstringspaces=false,% underline spaces within strings only
         showtabs=false,% show tabs within strings adding particular underscores
         stepnumber=2,% the step between two line-numbers. If it's 1, each line will be numbered
-        stringstyle=\color{mymauve},% string literal style
+        stringstyle=\color{artxmauve},% string literal style
         tabsize=2,% sets default tabsize to 2 spaces
         title=\lstname% show the filename of files
     }

@@ -11,15 +11,15 @@
 %---------------------------------------------------------------------------%
 %->> Document class declaration
 %---------------------------------------------------------------------------%
-\documentclass[doublesided]{Style/uwaterloothesis}%
+\documentclass[twoside]{Style/uwaterloothesis}%
 %- Multiple optional arguments:
-%- [<singlesided|doublesided|printcopy>]% set one or two sided eprint or print
+%- [<oneside|twoside|print>]% oneside eprint, twoside eprint, or paper print
 %- [draftversion]% show draft version information
 %- [standard options for book class: draft|paper size|font size|...]%
 %---------------------------------------------------------------------------%
 %->> Document settings
 %---------------------------------------------------------------------------%
-\usepackage[myhdr,list]{Style/artratex}% document settings
+\usepackage[list]{Style/artratex}% document settings
 %- usage: \usepackage[option1,option2,...,optionN]{artratex}
 %- Multiple optional arguments:
 %- [bibtex|biber]% set bibliography processor and package
@@ -30,14 +30,14 @@
 %- <alpha>: textual: not available; parenthetical: [Jon95]
 %- [geometry]% reconfigure page layout via geometry package
 %- [lscape]% provide landscape layout environment
-%- [myhdr]% enable header and footer via fancyhdr package
+%- [xhf]% disable header and footer via fancyhdr package
 %- [color]% provide color support via xcolor package
 %- [background]% enable page background
 %- [tikz]% provide complex diagrams via tikz package
 %- [table]% provide complex tables via ctable package
 %- [list]% provide enhanced list environments for algorithm and coding
 %- [math]% enable some extra math packages
-%- [blink]% set link colors to black
+%- [xlink]% disable link colors
 \usepackage{Style/artracom}% user defined commands
 %---------------------------------------------------------------------------%
 %->> Document inclusion
@@ -46,12 +46,16 @@
 %---------------------------------------------------------------------------%
 %->> Document content
 %---------------------------------------------------------------------------%
+%-
+%-> Titlepage information
+%-
+\input{Tex/Frontinfo}%
 \begin{document}
 %-
 %-> Frontmatter: title page, abstract, content list, symbol list, preface
 %-
 \frontmatter% initialize the environment
-\input{Tex/Frontpages}% title page, abstract, dedication
+\input{Tex/Frontmatter}% title page, abstract
 {% content list region
 \linespread{1.1}% local line space
 \intotoc*{\cleardoublepage}{\contentsname}% add link to bookmark
@@ -61,7 +65,7 @@
 \intotoc*{\cleardoublepage}{\listtablename}% add link to bookmark
 \listoftables% table catalog
 }
-\input{Tex/Prematter}% list of symbols, preface content
+\input{Tex/Prematter}% symbol list, preface content
 %-
 %-> Mainmatter
 %-
