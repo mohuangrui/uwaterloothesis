@@ -483,12 +483,16 @@
 %- Configure fancy style
 \ifartx@xhf% user defined header and footer style
     \pagestyle{fancy}%
-    \providecommand{\chaptermark}{}% compatibility for non-book classes
-    \providecommand{\thechapter}{}% compatibility for non-book classes
-    \providecommand{\CTEXthechapter}{\thechapter.}% compatibility for non ctex classes
-    %- Reset style of chapter and section mark to actual name
-    \renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{#1}}{}}%
-    \renewcommand{\sectionmark}[1]{\markright{\MakeUppercase{#1}}{}}%
+    \artxifcnt{chapter}{%
+        \providecommand{\CTEXthechapter}{\thechapter.}% compatibility for non ctex classes
+        \let\artxmark\CTEXthechapter%
+        \renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{#1}}{}}% reset mark to actual name
+        \renewcommand{\sectionmark}[1]{\markright{\MakeUppercase{#1}}{}}% reset mark to actual name
+    }{%
+        \providecommand{\CTEXthesection}{\thesection.}% compatibility for non ctex classes
+        \let\artxmark\CTEXthesection%
+        \renewcommand{\sectionmark}[1]{\markright{\MakeUppercase{#1}}{}}% reset mark to actual name
+    }%
     %- Deactivate uppercase effect
     \renewcommand{\MakeUppercase}[1]{#1}%
     %- Define different kinds of header and footer for different parts
@@ -501,7 +505,7 @@
     }
     \fancypagestyle{mainmatterstyle}{% style for mainmatter
         \fancyhf{}% clear fields
-        \fancyhead[C]{\footnotesize \ifthenelse{\isodd{\value{page}}}{\CTEXthechapter\ \leftmark}{\@title}}% structure elements
+        \fancyhead[C]{\footnotesize \ifthenelse{\isodd{\value{page}}}{\artxmark\ \leftmark}{\@title}}% structure elements
         \fancyfoot[C]{\footnotesize \thepage}% page number
         \renewcommand{\headrulewidth}{0.8pt}% header rule
         \renewcommand{\footrulewidth}{0pt}% footer rule
