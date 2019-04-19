@@ -268,11 +268,10 @@
     \RequirePackage{mathrsfs}% enable \mathscr for script alphabet
     \RequirePackage[cal=cm]{mathalfa}% map styles for calligraphic \mathcal and script \mathscr alphabet
 \else% <xelatex> or <lualatex> call system fonts
-    %- Text font: English <default: computer modern|fontspec: system fonts|others: font packages>
     \RequirePackage{fontspec}% support calling system fonts
     %- Font properties: <family> + <weight> + <shape> + <size>
     %- Specify the three default TeX font families: <main>, <sans>, <mono>
-    %- \setxxxxfont{<font>}[BoldFont=<font-b>,ItalicFont=<font-i>]%
+    %- \setxxxxfont{<font>}[BoldFont=<font-b>,ItalicFont=<font-i>,BoldItalicFont=<font-bi>]%
     %- <font>: \mdseries\upshape; <font-b>: \bfseries\upshape; <font-i>: \mdseries\itshape
     %- <\lfseries|\mdseries|\bfseries>: weight of font, default <\mdseries>
     %- <\upshape|\itshape|\scshape>: shape of font, default <\upshape>
@@ -291,14 +290,12 @@
     %- without NFSSFamily option, a font family is defined only if adding a new font name
     %\newfontfamily\<font-switch>{<font>}[<font features>]%
     %\newcommand{\text<font-switch>}[1]{{\<font-switch> #1}}%
+    %- Text font: English <default: computer modern|fontspec: system fonts|others: font packages>
     \RequirePackage{newtxtext}% main font
     %- Math font: <default: computer modern|others: font packages <newtxmath|unicode-math>>
     \RequirePackage[cmintegrals]{newtxmath}% times font, load after amsmath and newtxtext packages
     \RequirePackage{mathrsfs}% enable \mathscr for script alphabet
     \RequirePackage[cal=cm]{mathalfa}% map styles for calligraphic \mathcal and script \mathscr alphabet
-    %\RequirePackage{unicode-math}% another math font configuration
-    %\setmathfont{XITS Math}% a complete symbol set for STIX math fonts
-    %- mathrm and mathsf can be set by \setmathrm and \setmathsf
 \fi
 %-
 %-> Bibliography processor and package
