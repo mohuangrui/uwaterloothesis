@@ -566,15 +566,39 @@
 \ifartx@lscape%
 \fancypagestyle{lscape}{% landscape layout style
     \fancyhf{}% clear fields
+    \fancyhead[C]{%
+        \begin{textblock}{1.0}[0.5,0.5](0.08,0.5)%
+            \rotatebox{90}{%
+                \footnotesize \ifnumodd{\value{page}}{\artxmark\ \leftmark}{\@title}%
+            }%
+        \end{textblock}%
+        \begin{textblock}{1.0}[0.5,0.5](0.08,0.5)%
+            \rotatebox{90}{%
+                \rule[-14pt]{\textwidth}{0.8pt}%
+            }%
+        \end{textblock}%
+    }%
     \fancyfoot[C]{%
-    %- textpos: \begin{textblock}{<blockwidth>}[0.5,0.5](<hpos>,<vpos>) text... \end{textblock}
+        \begin{textblock}{1.0}[0.5,0.5](0.92,0.5)
+            \rotatebox{90}{%
+                \footnotesize \thepage%
+            }%
+        \end{textblock}%
+    }%
+    %- textpos: \begin{textblock}{<blockwidth>}[<ho>,<vo>](<hpos>,<vpos>) text... \end{textblock}
     %- origin of the absolute coordinate is the top-left corner of the page
-    %- [0.5,0.5] means reference point of the block is the middle
-    \begin{textblock}{0.1}[0.5,0.5](0.85,0.5){\rotatebox{90}{\footnotesize \thepage}}\end{textblock}% position the page number
-    }
-    %- set units of <blockwidth>, <hpos>, and <vpos> arguments by corresponding modules 
-    \setlength{\TPHorizModule}{8.5in}% set to the width of page
-    \setlength{\TPVertModule}{11in}% set to the height of page
+    %- text will be set in a box <blockwidth> modules wide and placed on the page
+    %- with the point [<ho>,<vo>] of the block at the position (<hpos>,<vpos>) of the page
+    %- [<ho>,<vo>] are fractions of the width and height of the text box and specify
+    %- the reference point of the text box, [0,0]: top left; [0.5,0.5]: middle; [0,1]: bottom left
+    %- [<hpos>,<vpos>] are fractions of the width and height of the page and specify
+    %- the position point on page, [0,0]: top left; [0.5,0.5]: middle; [0,1]: bottom left
+    %- set unit of <blockwidth>, <hpos> arguments via module 
+    \setlength{\TPHorizModule}{\paperwidth}%
+    %- set unit of <vpos> argument via module 
+    \setlength{\TPVertModule}{\paperheight}%
+    %- \rule[raise]{width}{thickness}
+    %- \rotatebox[origin=c]{angle}{text}
     \renewcommand{\headrulewidth}{0pt}% header rule
     \renewcommand{\footrulewidth}{0pt}% footer rule
 }
