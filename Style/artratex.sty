@@ -515,7 +515,7 @@
     }
     \fancypagestyle{mainmatterstyle}{% style for mainmatter
         \fancyhf{}% clear fields
-        \fancyhead[C]{\footnotesize \ifnumodd{\value{page}}{\artxmark\ \leftmark}{\@title}}% structure elements
+        \fancyhead[C]{\footnotesize \ifnumodd{\value{page}}{\artxmark\enskip\leftmark}{\@title}}% structure elements
         \fancyfoot[C]{\footnotesize \thepage}% page number
         \renewcommand{\headrulewidth}{0.8pt}% header rule
         \renewcommand{\footrulewidth}{0pt}% footer rule
@@ -569,7 +569,7 @@
     \fancyhead[C]{%
         \begin{textblock}{1.0}[0.5,0.5](0.08,0.5)%
             \rotatebox{90}{%
-                \footnotesize \ifnumodd{\value{page}}{\artxmark\ \leftmark}{\@title}%
+                \footnotesize \ifnumodd{\value{page}}{\artxmark\enskip\leftmark}{\@title}%
             }%
         \end{textblock}%
         \begin{textblock}{1.0}[0.5,0.5](0.08,0.5)%
