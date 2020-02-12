@@ -4,5 +4,6 @@
 
 ## Download
 
-**Clone or download -> Download Zip**
+* **Clone or download -> Download Zip**
+* [Overleaf](https://www.overleaf.com/latex/templates/uwaterloothesis/fqkjzfnmnfmq)
 
